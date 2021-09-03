@@ -1,6 +1,11 @@
-.app-wrapper {
+/* .all{
+  background-color: gray;
+} */
+
+.app_wrapper {
+
   width: 90vw;
-  margin: 0 auto;
+  margin: 20px auto;
   display: grid;
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;

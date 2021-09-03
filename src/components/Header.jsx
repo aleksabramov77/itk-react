@@ -1,10 +1,10 @@
 import React from "react";
-import "./Header.css";
+import s from "./Header.module.css";
 
 const Header = () => {
   return (
-    <header className="header">
-      <img src="https://seeklogo.com/images/C/company-name-logo-C74A7D6F5A-seeklogo.com.png" />
+    <header className={s.header}>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png" />
     </header>
   );
 };

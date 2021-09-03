@@ -1,23 +1,23 @@
 import React from "react";
-import './Profile.css'
+import s from "./Profile.module.css";
 
 const Profile = () => {
   return (
-    <div className="content">
+    <div className={s.content}>
       <div>
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Herjangsfjorden_%26_Ofotfjorden%2C_wide%2C_2009_09.jpg"></img>
       </div>
-      <div className="avatar">
+      <div className={s.avatar}>
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg"></img>
-        <br/>
+        <br />
         ava + description
       </div>
-      <div>
+      <div className={s.myPosts}>
         My posts
         <div>New post</div>
-        <div>
-          <div>Post 1</div>
-          <div>Post 2</div>
+        <div className={s.posts}>
+          <div className={s.item}>Post 1</div>
+          <div className={s.item}>Post 2</div>
         </div>
       </div>
     </div>
