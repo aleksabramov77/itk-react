@@ -1,0 +1,13 @@
+.content {
+    grid-area: c;
+    background-color: blue;
+  }
+  
+  .content img {
+    /* padding: 5px; */
+    width: 100%;
+  }
+  .content .avatar img {
+    padding: 5px;
+    width: 10%;
+  }
