@@ -1,0 +1,11 @@
+.myPosts {
+  font-weight: 500;
+  /*padding: 10px;*/
+}
+
+.posts {
+  border-radius: 10px;
+  background-color:#6fc3ff;
+  padding: 5px;
+}
+

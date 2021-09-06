@@ -2,10 +2,10 @@
   background-color: gray;
 } */
 
-.app_wrapper {
-
+.appWrapper {
   width: 90vw;
-  margin: 20px auto;
+  height: 95vh;
+  margin: 2.5vh auto;
   display: grid;
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
@@ -13,5 +13,33 @@
   grid-template-areas: 
     "h h"
     "n c";
+  }
+
+.appWrapperContent {
+  background-color: #9dd5fc;
+  box-shadow: 5px 5px 5px 0px #286d9b;
+  border-radius: 10px;
+  grid-area: c;
+  display: grid;
+  grid-template-rows: 150px 1fr;
+  /* grid-gap: 10px; */
+  grid-template-areas: 
+    "contentHeadImage"
+    "dynamicContent";
+
+}
+
+.contentHeadImage {
+  background-image: url(https://wallpaperaccess.com/full/211066.jpg);
+  background-position: center;
+  background-size: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  grid-area: contentHeadImage;
+}
+
+.dynamicContent {
+  grid-area: dynamicContent;
+  padding: 10px;
   }
   
