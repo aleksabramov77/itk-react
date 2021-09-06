@@ -1,12 +1,7 @@
 .header {
-  background-color:#9DD5FC;
-  box-shadow: 5px 5px 5px 0px #286d9b;
-  border-radius: 10px;
-
-  grid-area: h;
+  padding: 7px;
 }
 
-.header img {
-  padding: 5px;
-  height: 45px;
+.headerImg {
+  height: 30px;
 }

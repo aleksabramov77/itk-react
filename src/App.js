@@ -1,31 +1,24 @@
 import React from 'react';
+import {BrowserRouter} from "react-router-dom";
+
 import s from './App.module.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Content/Profile/Profile';
-import Messages from "./components/Content/Messages/Messages";
-import {BrowserRouter, Route} from "react-router-dom";
-import News from "./components/Content/News/News";
-import Music from "./components/Content/Music/Music";
-import Settings from "./components/Content/Settings/Settings";
+import Content from "./components/Content/Content";
 
 
 const App = () => {
     return (
         <BrowserRouter>
             <div className={s.appWrapper}>
-                <Header/>
-                <Navbar/>
-                <div className={s.appWrapperContent}>
-                    <div className={s.contentHeadImage}>
-                    </div>
-                    <div className={s.dynamicContent}>
-                        <Route path='/profile' component={Profile}/>
-                        <Route path='/messages' component={Messages}/>
-                        <Route path='/news' component={News}/>
-                        <Route path='/music' component={Music}/>
-                        <Route path='/settings' component={Settings}/>
-                    </div>
+                <div className={s.block + ' ' + s.header}>
+                    <Header/>
+                </div>
+                <div className={s.block + ' ' + s.navbar}>
+                    <Navbar/>
+                </div>
+                <div className={s.block + ' ' + s.content}>
+                    <Content/>
                 </div>
             </div>
         </BrowserRouter>

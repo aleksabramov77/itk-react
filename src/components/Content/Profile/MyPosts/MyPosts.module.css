@@ -1,11 +1,17 @@
 .myPosts {
   font-weight: 500;
-  /*padding: 10px;*/
 }
 
 .posts {
+  padding: 10px;
   border-radius: 10px;
   background-color:#6fc3ff;
-  padding: 5px;
+  display: grid;
+  grid-gap: 10px;
+  /*grid-template-rows: auto;*/
+}
+
+.post {
+  margin: 10px;
 }
 
