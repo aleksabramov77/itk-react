@@ -6,11 +6,11 @@ const Post = (props) => {
     <div className={s.post}>
       <img
         className={s.avatar}
-        src={props.src}
+        src="https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg"
       />
       <div className={s.postText}>{props.message}</div>
       <div>
-        <span>{props.likesCounter} likes</span>
+        <span>{props.likesCount} likes</span>
       </div>
     </div>
   );

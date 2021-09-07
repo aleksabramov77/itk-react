@@ -1,11 +1,11 @@
-.myPosts {
+.postsBlock {
   font-weight: 500;
 }
 
 .posts {
   padding: 10px;
   border-radius: 10px;
-  background-color:#6fc3ff;
+  background-color: #6fc3ff;
   display: grid;
   grid-gap: 10px;
   /*grid-template-rows: auto;*/
@@ -15,3 +15,11 @@
   margin: 10px;
 }
 
+.textareaBlock {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.buttonBlock {
+  margin-bottom: 10px;
+}
