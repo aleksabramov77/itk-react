@@ -1,18 +1,18 @@
 import React from "react";
 import s from "./Messenger.module.css";
-import Dialog from "./Dialog/Dialog";
+import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 
 
 const Messenger = (props) => {
   // debugger
-  let dialogsElements = props.dialogsData.map((dialog) => (
-    <Dialog id={dialog.id} name={dialog.name} />
+  let dialogsElements = props.state.dialogsData.map(d => (
+    <DialogItem id={d.id} name={d.name} />
   ));
 
-  let messagesElements = props.messagesData.map((message) => (
-    <Message message={message.message} />
+  let messagesElements = props.state.messagesData.map(m => (
+    <Message message={m.message} />
   ));
 
   return (

@@ -13,8 +13,18 @@ const Content = (props) => {
     <div className={s.appWrapperContent}>
       <div className={s.contentHeadImage}></div>
       <div className={s.dynamicContent}>
-        <Route path="/profile" render={() => <Profile postsData={props.postsData} />} />
-        <Route path="/messenger" render={() => <Messenger dialogsData={props.dialogsData} messagesData={props.messagesData} />} />
+        <Route
+          path="/profile"
+          render={() => <Profile state={props.state.propfilePage} />}
+        />
+        <Route
+          path="/messenger"
+          render={() => (
+            <Messenger
+              state={props.state.messengerPage}
+            />
+          )}
+        />
         <Route path="/news" render={() => <News />} />
         <Route path="/music" render={() => <Music />} />
         <Route path="/settings" render={() => <Settings />} />

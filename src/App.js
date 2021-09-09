@@ -18,7 +18,7 @@ const App = (props) => {
                     <Navbar/>
                 </div>
                 <div className={s.block + ' ' + s.content}>
-                    <Content dialogsData={props.dialogsData} messagesData={props.messagesData}  postsData={props.postsData} />
+                    <Content state={props.state} />
                 </div>
             </div>
         </BrowserRouter>
