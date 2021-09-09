@@ -7,7 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Content from "./components/Content/Content";
 
 
-const App = () => {
+const App = (props) => {
     return (
         <BrowserRouter>
             <div className={s.appWrapper}>
@@ -18,7 +18,7 @@ const App = () => {
                     <Navbar/>
                 </div>
                 <div className={s.block + ' ' + s.content}>
-                    <Content/>
+                    <Content dialogsData={props.dialogsData} messagesData={props.messagesData}  postsData={props.postsData} />
                 </div>
             </div>
         </BrowserRouter>
