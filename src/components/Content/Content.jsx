@@ -14,15 +14,13 @@ const Content = (props) => {
       <div className={s.dynamicContent}>
         <Route
           path="/profile"
-          render={() => <Profile state={props.state.propfilePage} />}
+          render={() => (
+            <Profile state={props.state.propfilePage} addPost={props.addPost} />
+          )}
         />
         <Route
           path="/messenger"
-          render={() => (
-            <Messenger
-              state={props.state.messengerPage}
-            />
-          )}
+          render={() => <Messenger state={props.state.messengerPage} />}
         />
         <Route path="/news" render={() => <News />} />
         <Route path="/music" render={() => <Music />} />
