@@ -14,3 +14,17 @@
 
 .message {
 }
+
+
+.newMessage {
+  grid-column: span 2;
+}
+
+.textareaBlock {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.buttonBlock {
+  margin-bottom: 10px;
+} 
