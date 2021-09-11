@@ -4,7 +4,7 @@ import s from "./Post.module.css";
 const Post = (props) => {
   return (
     <div className={s.post}>
-      <img
+      <img alt='ava'
         className={s.avatar}
         src="https://lwlies.com/wp-content/uploads/2017/04/avatar-2009.jpg"
       />

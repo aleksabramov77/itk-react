@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 let state = {
     propfilePage: {
         postsData: [
@@ -27,13 +29,14 @@ let state = {
 }
 
 export let addPost = (post) => {
+    debugger
     let newPost = {
         id: 3,
         message: post,
         likesCount: 0
     };
-
     state.propfilePage.postsData.push(newPost)
+    rerenderEntireTree(state);
 }
 
 export default state;
