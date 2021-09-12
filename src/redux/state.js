@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from "../render";
+let rerenderEntireTree = () => {
+    console.log('State is changed');
+};
 
 let state = {
     propfilePage: {
@@ -29,7 +31,9 @@ let state = {
     }
 }
 
-export let addPost = () => {
+window.state = state;
+
+export const addPost = () => {
     // debugger
     let newPost = {
         id: state.propfilePage.postsData.length + 1,
@@ -41,7 +45,7 @@ export let addPost = () => {
     rerenderEntireTree(state);
 }
 
-export let addMessage = () => {
+export const addMessage = () => {
     // debugger
     let newMessage = {
         id: state.messengerPage.messagesData.length + 1,
@@ -52,18 +56,22 @@ export let addMessage = () => {
     rerenderEntireTree(state);
 }
 
-export let onChangePost = (newPostText) => {
+export const onChangePost = (newPostText) => {
     // debugger
     state.propfilePage.newPostText = newPostText;
     // console.log('From state newPostText  ' + state.propfilePage.newPostText)
     rerenderEntireTree(state);
 }
 
-export let onChangeMessage = (newMessageText) => {
+export const onChangeMessage = (newMessageText) => {
     // debugger
     state.messengerPage.newMessageText = newMessageText;
     // console.log('From state newMessageText  ' + state.messengerPage.newMessageText)
     rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
 }
 
 export default state;
