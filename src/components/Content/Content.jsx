@@ -15,12 +15,22 @@ const Content = (props) => {
         <Route
           path="/profile"
           render={() => (
-            <Profile state={props.state.propfilePage} addPost={props.addPost} />
+            <Profile
+              state={props.state.propfilePage}
+              addPost={props.addPost}
+              onChangePost={props.onChangePost}
+            />
           )}
         />
         <Route
           path="/messenger"
-          render={() => <Messenger state={props.state.messengerPage} />}
+          render={() => (
+            <Messenger
+              state={props.state.messengerPage}
+              addMessage={props.addMessage}
+              onChangeMessage={props.onChangeMessage}
+            />
+          )}
         />
         <Route path="/news" render={() => <News />} />
         <Route path="/music" render={() => <Music />} />

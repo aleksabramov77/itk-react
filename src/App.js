@@ -9,19 +9,25 @@ import Content from "./components/Content/Content";
 
 const App = (props) => {
     return (
-    <BrowserRouter>
-        <div className={s.appWrapper}>
-            <div className={s.block + ' ' + s.header}>
-                <Header />
+        <BrowserRouter>
+            <div className={s.appWrapper}>
+                <div className={s.block + ' ' + s.header}>
+                    <Header />
+                </div>
+                <div className={s.block + ' ' + s.navbar}>
+                    <Navbar />
+                </div>
+                <div className={s.block + ' ' + s.content}>
+                    <Content
+                        state={props.state}
+                        addPost={props.addPost}
+                        onChangePost={props.onChangePost}
+                        addMessage={props.addMessage}
+                        onChangeMessage={props.onChangeMessage}
+                    />
+                </div>
             </div>
-            <div className={s.block + ' ' + s.navbar}>
-                <Navbar />
-            </div>
-            <div className={s.block + ' ' + s.content}>
-                <Content state={props.state} addPost={props.addPost} />
-            </div>
-        </div>
-    </BrowserRouter>
+        </BrowserRouter>
     );
 };
 
