@@ -16,10 +16,8 @@ const Content = (props) => {
           path="/profile"
           render={() => (
             <Profile
-              // store={props.store}
               state={props.state.profilePage}
-              addPost={props.addPost}
-              onChangePost={props.onChangePost}
+              dispatch={props.dispatch}
             />
           )}
         />
@@ -27,10 +25,8 @@ const Content = (props) => {
           path="/messenger"
           render={() => (
             <Messenger
-              // store={props.store}
               state={props.state.messengerPage}
-              addMessage={props.addMessage}
-              onChangeMessage={props.onChangeMessage}
+              dispatch={props.dispatch}
             />
           )}
         />

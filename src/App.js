@@ -18,12 +18,8 @@ const App = (props) => {
         </div>
         <div className={s.block + ' ' + s.content}>
           <Content
-            // store={props.store}
             state={props.state}
-            addPost={props.addPost}
-            onChangePost={props.onChangePost}
-            addMessage={props.addMessage}
-            onChangeMessage={props.onChangeMessage}
+            dispatch={props.dispatch}
           />
         </div>
       </div>

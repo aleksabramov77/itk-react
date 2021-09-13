@@ -1,6 +1,4 @@
 let store = {
-  _callSubscriber() {
-  },
   _state: {
     profilePage: {
       postsData: [
@@ -29,41 +27,48 @@ let store = {
       newMessageText: ''
     }
   },
+  _callSubscriber() {
+  },
+
   getState() {
     return this._state;
   },
-  addPost() {
-    // debu;gger
-    let newPost = {
-      id: this._state.profilePage.postsData.length + 1,
-      message: this._state.profilePage.newPostText,
-      likesCount: this._state.profilePage.postsData.length + 1
-    };
-    this._state.profilePage.postsData.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-  addMessage() {
-    let newMessage = {
-      id: this._state.messengerPage.messagesData.length + 1,
-      message: this._state.messengerPage.newMessageText,
-    };
-    this._state.messengerPage.messagesData.push(newMessage);
-    this._state.messengerPage.newMessageText = '';
-    this._callSubscriber(this._state);
-  },
-  onChangePost(newPostText) {
-    this._state.profilePage.newPostText = newPostText;
-    console.log(this._state.profilePage.newPostText)
-    this._callSubscriber(this._state);
-  },
-  onChangeMessage(newMessageText) {
-    this._state.messengerPage.newMessageText = newMessageText;
-    this._callSubscriber(this._state);
-  },
   subscribe(observer) {
     this._callSubscriber = observer;
-  }
+  },
+
+  dispatch(action) {
+    if(action.type === 'ADD-POST') {
+      let newPost = {
+        id: this._state.profilePage.postsData.length + 1,
+        message: this._state.profilePage.newPostText,
+        likesCount: this._state.profilePage.postsData.length + 1
+      };
+      this._state.profilePage.postsData.push(newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber(this._state);
+    }
+    else if(action.type === 'ADD-MESSAGE') {
+      let newMessage = {
+        id: this._state.messengerPage.messagesData.length + 1,
+        message: this._state.messengerPage.newMessageText,
+      };
+      this._state.messengerPage.messagesData.push(newMessage);
+      this._state.messengerPage.newMessageText = '';
+      this._callSubscriber(this._state);
+    }
+    else if(action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newPostText;
+      console.log(this._state.profilePage.newPostText)
+      this._callSubscriber(this._state);
+    }
+    else if(action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+      this._state.messengerPage.newMessageText = action.newMessageText;
+      console.log(this._state.messengerPage.newMessageText)
+      this._callSubscriber(this._state);
+    }
+    }
+
 };
 
 window.store = store;

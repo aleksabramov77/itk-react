@@ -15,12 +15,13 @@ const Messenger = (props) => {
   let newMessageElement = React.createRef();
 
   let addMessage = () => {
-    props.addMessage()
+    props.dispatch({type: 'ADD-MESSAGE'})
   };
 
-  let onChangeMessage = () => {
+  let updateNewMessageText = () => {
     let text = newMessageElement.current.value
-    props.onChangeMessage(text);
+    let action = {type: 'UPDATE-NEW-MESSAGE-TEXT', newMessageText: text};
+    props.dispatch(action);
   }
 
 
@@ -32,7 +33,7 @@ const Messenger = (props) => {
         <div >
           <textarea
             ref={newMessageElement}
-            onChange={onChangeMessage}
+            onChange={updateNewMessageText}
             className={s.textareaBlock}
             value={props.state.newMessageText}
           />

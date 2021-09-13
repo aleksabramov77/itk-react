@@ -3,6 +3,7 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
+
   let postsElements = props.state.postsData.slice(0).reverse().map((post) => (
     <Post
       message={post.message}
@@ -13,12 +14,13 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    props.addPost();
+    props.dispatch({type: 'ADD-POST'});
   };
 
-  let onChangePost = () => {
+  let updateNewPostText = () => {
     let text = newPostElement.current.value;
-    props.onChangePost(text);
+    let action = {type: 'UPDATE-NEW-POST-TEXT', newPostText: text};
+    props.dispatch(action);
   };
 
   return (
@@ -28,7 +30,7 @@ const MyPosts = (props) => {
         <div>
           <textarea
             ref={newPostElement}
-            onChange={onChangePost}
+            onChange={updateNewPostText}
             className={s.textareaBlock}
             value={props.state.newPostText}
           />
