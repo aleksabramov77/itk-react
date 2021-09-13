@@ -9,7 +9,7 @@ const MyPosts = (props) => {
       likesCount={post.likesCount}
     />
   ));
-  
+
   let newPostElement = React.createRef();
 
   let addPost = () => {
@@ -18,9 +18,8 @@ const MyPosts = (props) => {
 
   let onChangePost = () => {
     let text = newPostElement.current.value;
-    props.onChangePost(text)
-  }
-
+    props.onChangePost(text);
+  };
 
   return (
     <div className={s.postsBlock}>
@@ -28,14 +27,17 @@ const MyPosts = (props) => {
       <div>
         <div>
           <textarea
-          ref={newPostElement}
-          onChange={onChangePost}
-          className={s.textareaBlock}
-          value={props.state.newPostText}
+            ref={newPostElement}
+            onChange={onChangePost}
+            className={s.textareaBlock}
+            value={props.state.newPostText}
           />
         </div>
         <div>
-          <button className={s.buttonBlock} onClick={addPost}>
+          <button
+            className={s.buttonBlock}
+            onClick={addPost}
+          >
             Add post
           </button>
         </div>

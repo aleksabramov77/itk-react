@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 import s from "./Content.module.css";
 import Profile from "./Profile/Profile";
 import Messenger from "./Messenger/Messenger";
@@ -16,7 +16,8 @@ const Content = (props) => {
           path="/profile"
           render={() => (
             <Profile
-              state={props.state.propfilePage}
+              // store={props.store}
+              state={props.state.profilePage}
               addPost={props.addPost}
               onChangePost={props.onChangePost}
             />
@@ -26,15 +27,16 @@ const Content = (props) => {
           path="/messenger"
           render={() => (
             <Messenger
+              // store={props.store}
               state={props.state.messengerPage}
               addMessage={props.addMessage}
               onChangeMessage={props.onChangeMessage}
             />
           )}
         />
-        <Route path="/news" render={() => <News />} />
-        <Route path="/music" render={() => <Music />} />
-        <Route path="/settings" render={() => <Settings />} />
+        <Route path="/news" render={() => <News/>}/>
+        <Route path="/music" render={() => <Music/>}/>
+        <Route path="/settings" render={() => <Settings/>}/>
       </div>
     </div>
   );
