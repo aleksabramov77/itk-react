@@ -1,3 +1,8 @@
+import profilePageReducer from "./profilePage-reducer";
+import messengerPageReducer from "./messengerPage-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
+
 let store = {
   _state: {
     profilePage: {
@@ -25,7 +30,8 @@ let store = {
         {id: 5, message: "Yo yo yo"}
       ],
       newMessageText: ''
-    }
+    },
+    sidebar: {}
   },
   _callSubscriber() {
   },
@@ -38,39 +44,14 @@ let store = {
   },
 
   dispatch(action) {
-    if(action.type === 'ADD-POST') {
-      let newPost = {
-        id: this._state.profilePage.postsData.length + 1,
-        message: this._state.profilePage.newPostText,
-        likesCount: this._state.profilePage.postsData.length + 1
-      };
-      this._state.profilePage.postsData.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
-    }
-    else if(action.type === 'ADD-MESSAGE') {
-      let newMessage = {
-        id: this._state.messengerPage.messagesData.length + 1,
-        message: this._state.messengerPage.newMessageText,
-      };
-      this._state.messengerPage.messagesData.push(newMessage);
-      this._state.messengerPage.newMessageText = '';
-      this._callSubscriber(this._state);
-    }
-    else if(action.type === 'UPDATE-NEW-POST-TEXT') {
-      this._state.profilePage.newPostText = action.newPostText;
-      console.log(this._state.profilePage.newPostText)
-      this._callSubscriber(this._state);
-    }
-    else if(action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-      this._state.messengerPage.newMessageText = action.newMessageText;
-      console.log(this._state.messengerPage.newMessageText)
-      this._callSubscriber(this._state);
-    }
-    }
-
+    profilePageReducer(this._state.profilePage, action);
+    messengerPageReducer(this._state.messengerPage, action);
+    sidebarReducer(this._state.sidebar, action);
+    this._callSubscriber(this._state);
+  }
 };
 
 window.store = store;
+
 
 export default store;
