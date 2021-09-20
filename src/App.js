@@ -7,6 +7,7 @@ import Content from "./components/Content/Content";
 
 
 const App = (props) => {
+  // debugger
   return (
     <BrowserRouter>
       <div className={s.appWrapper}>

@@ -8,6 +8,7 @@ import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
 
 const Content = (props) => {
+  // debugger
   return (
     <div className={s.appWrapperContent}>
       <div className={s.contentHeadImage}></div>
