@@ -2,10 +2,10 @@ import React from "react";
 import {Route} from "react-router-dom";
 import s from "./Content.module.css";
 import Profile from "./Profile/Profile";
-import Messenger from "./Messenger/Messenger";
 import News from "./News/News";
 import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
+import MessengerContainer from "./Messenger/MessengerContainer";
 
 const Content = (props) => {
   // debugger
@@ -17,17 +17,15 @@ const Content = (props) => {
           path="/profile"
           render={() => (
             <Profile
-              state={props.state.profilePage}
-              dispatch={props.dispatch}
+              store={props.store}
             />
           )}
         />
         <Route
           path="/messenger"
           render={() => (
-            <Messenger
-              state={props.state.messengerPage}
-              dispatch={props.dispatch}
+            <MessengerContainer
+              store={props.store}
             />
           )}
         />

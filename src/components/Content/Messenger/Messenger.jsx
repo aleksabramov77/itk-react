@@ -2,27 +2,26 @@ import React from "react";
 import s from "./Messenger.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/messengerPage-reducer";
 
 
 
 const Messenger = (props) => {
-  let dialogsElements = props.state.dialogsData.map((d) => (
+  let dialogsElements = props.dialogs.map((d) => (
     <DialogItem id={d.id} name={d.name} />
   ));
 
-  let messagesElements = props.state.messagesData.map((m) => (
+  let messagesElements = props.messages.map((m) => (
     <Message message={m.message} />
   ));
 
 
-  let addMessage = () => {
-    props.dispatch(addMessageActionCreator())
+  let onAddMessage = () => {
+    props.addMessage()
   };
 
-  let updateNewMessageText = (e) => {
+  let onUpdateNewMessageText = (e) => {
     let newText = e.target.value;
-    props.dispatch(updateNewMessageTextActionCreator(newText));
+    props.updateNewMessageText(newText);
   }
 
 
@@ -33,15 +32,15 @@ const Messenger = (props) => {
       <div className={s.newMessage}>
         <div >
           <textarea
-            onChange={updateNewMessageText}
+            onChange={onUpdateNewMessageText}
             placeholder='Enter your message'
             className={s.textareaBlock}
-            value={props.state.newMessageText}
+            value={props.newMessageText}
           />
         </div>
         <div>
           <button
-            onClick={addMessage}
+            onClick={onAddMessage}
             className={s.buttonBlock}>
             Send message
           </button>

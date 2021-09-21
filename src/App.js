@@ -19,8 +19,7 @@ const App = (props) => {
         </div>
         <div className={s.block + ' ' + s.content}>
           <Content
-            state={props.state}
-            dispatch={props.dispatch}
+            store={props.store}
           />
         </div>
       </div>
