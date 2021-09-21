@@ -6,21 +6,19 @@ import Navbar from './components/Navbar/Navbar';
 import Content from "./components/Content/Content";
 
 
-const App = (props) => {
+const App = () => {
   // debugger
   return (
     <BrowserRouter>
       <div className={s.appWrapper}>
         <div className={s.block + ' ' + s.header}>
-          <Header/>
+          <Header />
         </div>
         <div className={s.block + ' ' + s.navbar}>
-          <Navbar/>
+          <Navbar />
         </div>
         <div className={s.block + ' ' + s.content}>
-          <Content
-            store={props.store}
-          />
+          <Content />
         </div>
       </div>
     </BrowserRouter>

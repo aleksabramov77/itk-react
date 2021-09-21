@@ -7,7 +7,7 @@ import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
 import MessengerContainer from "./Messenger/MessengerContainer";
 
-const Content = (props) => {
+const Content = () => {
   // debugger
   return (
     <div className={s.appWrapperContent}>
@@ -16,17 +16,13 @@ const Content = (props) => {
         <Route
           path="/profile"
           render={() => (
-            <Profile
-              store={props.store}
-            />
+            <Profile />
           )}
         />
         <Route
           path="/messenger"
           render={() => (
-            <MessengerContainer
-              store={props.store}
-            />
+            <MessengerContainer />
           )}
         />
         <Route path="/news" render={() => <News/>}/>
