@@ -24,18 +24,23 @@ let initialState = {
 
 const messengerPageReducer = (state=initialState, action) => {
   switch (action.type) {
-    case ADD_MESSAGE:
+    case ADD_MESSAGE: {
       let newMessage = {
         id: state.messagesData.length + 1,
         message: state.newMessageText,
       };
-      state.messagesData.push(newMessage);
-      state.newMessageText = '';
-      return state;
-    case UPDATE_NEW_MESSAGE_TEXT:
-      state.newMessageText = action.newMessageText;
-      console.log(state.newMessageText);
-      return state;
+      let stateCopy = {...state}
+      stateCopy.messagesData = [...state.messagesData]
+      stateCopy.messagesData.push(newMessage);
+      stateCopy.newMessageText = '';
+      return stateCopy;
+    }
+    case UPDATE_NEW_MESSAGE_TEXT: {
+      let stateCopy = {...state}
+      stateCopy.newMessageText = action.newMessageText;
+      console.log(stateCopy.newMessageText);
+      return stateCopy;
+    }
     default:
       return state;
   }
