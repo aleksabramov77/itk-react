@@ -1,0 +1,33 @@
+.user {
+    border: 1px solid grey;
+    background-color: lightcyan;
+    margin: 10px;
+    padding: 5px;
+    display: grid;
+    height: 10vh;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 5fr 1fr;
+    grid-gap: 5px;
+    grid-template-areas: 'name NONE city '
+    'foll stat coun';
+}
+
+.name {
+    grid-area: name;
+}
+
+.status {
+    grid-area: stat;
+}
+
+.followed {
+    grid-area: foll;
+}
+
+.country {
+    grid-area: coun;
+}
+
+.city {
+    grid-area: city;
+}

@@ -11,15 +11,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className={s.appWrapper}>
-        <div className={s.block + ' ' + s.header}>
-          <Header />
-        </div>
-        <div className={s.block + ' ' + s.navbar}>
-          <Navbar />
-        </div>
-        <div className={s.block + ' ' + s.content}>
-          <Content />
-        </div>
+        <div className={s.block + ' ' + s.header}><Header /></div>
+        <div className={s.block + ' ' + s.navbar}><Navbar /></div>
+        <div className={s.block + ' ' + s.content}><Content /></div>
       </div>
     </BrowserRouter>
   );

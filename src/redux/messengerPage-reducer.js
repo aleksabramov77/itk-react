@@ -52,9 +52,9 @@ const messengerPageReducer = (state = initialState, action) => {
 
 export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
 
-export const updateNewMessageTextActionCreator = newText => ({
+export const updateNewMessageTextActionCreator = newMessageText => ({
   type: UPDATE_NEW_MESSAGE_TEXT,
-  newMessageText: newText
+  newMessageText
 });
 
 export default messengerPageReducer;

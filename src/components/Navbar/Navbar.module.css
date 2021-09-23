@@ -2,13 +2,13 @@
   /*padding: 7px;*/
 }
 
-.item a{
+.nav>div a{
   font-weight: 600;
   color: #286d9b;
   text-decoration: none;
 }
 
-.item a.active{
+.nav>div a.active{
   color: red;
 }
 
