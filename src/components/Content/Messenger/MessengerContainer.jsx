@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/messengerPage-reducer";
 import Messenger from "./Messenger";
 import {connect} from "react-redux";

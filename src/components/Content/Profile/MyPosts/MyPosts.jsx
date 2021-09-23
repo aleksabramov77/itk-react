@@ -3,15 +3,14 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 
-
-
 const MyPosts = (props) => {
   // debugger
 
-  let postsElements = props.posts.slice(0).reverse().map((post) => (
+  let postsElements = props.posts.slice(0).reverse().map(p => (
     <Post
-      message={post.message}
-      likesCount={post.likesCount}
+      key={p.id}
+      message={p.message}
+      likesCount={p.likesCount}
     />
   ));
 

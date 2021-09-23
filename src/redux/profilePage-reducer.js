@@ -8,25 +8,33 @@ let initialState = {
   ],
   newPostText: ''
 }
-const profilePageReducer = (state=initialState, action) => {
+const profilePageReducer = (state = initialState, action) => {
   // debugger
+  let stateCopy
+
   switch (action.type) {
-    case ADD_POST: {
+
+    case ADD_POST:
       let newPost = {
-        id: state.postsData.length + 1,
+        id: state.postsData.length + 1, //id counter imitation
         message: state.newPostText,
-        likesCount: state.postsData.length + 1
+        likesCount: state.postsData.length + 1  //likes counter imitation
       };
-      let stateCopy = {...state}
+      stateCopy = {
+        ...state,
+        postsData: [ ...state.postsData, newPost ],
+        newPostText: ''
+      }
       stateCopy.postsData = [...state.postsData]
       stateCopy.postsData.push(newPost);
       stateCopy.newPostText = '';
       return stateCopy;
-    }
 
     case UPDATE_NEW_POST_TEXT:
-      let stateCopy = {...state}
-      stateCopy.newPostText = action.newPostText;
+      stateCopy = {
+        ...state,
+        newPostText: action.newPostText
+      }
       console.log(stateCopy.newPostText);
       return stateCopy;
 
@@ -37,7 +45,7 @@ const profilePageReducer = (state=initialState, action) => {
 
 export const addPostActionCreator = () => ({type: ADD_POST});
 
-export const updateNewPostTextActionCreator = (newText) => ({
+export const updateNewPostTextActionCreator = newText => ({
   type: UPDATE_NEW_POST_TEXT,
   newPostText: newText
 });

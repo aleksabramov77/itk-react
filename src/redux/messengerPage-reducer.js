@@ -22,25 +22,32 @@ let initialState = {
 };
 
 
-const messengerPageReducer = (state=initialState, action) => {
+const messengerPageReducer = (state = initialState, action) => {
+  // debugger
+  let stateCopy
+
   switch (action.type) {
-    case ADD_MESSAGE: {
+
+    case ADD_MESSAGE:
       let newMessage = {
-        id: state.messagesData.length + 1,
+        id: state.messagesData.length + 1, //id counter imitation
         message: state.newMessageText,
       };
-      let stateCopy = {...state}
-      stateCopy.messagesData = [...state.messagesData]
-      stateCopy.messagesData.push(newMessage);
-      stateCopy.newMessageText = '';
+      stateCopy = {
+        ...state,
+        messagesData: [...state.messagesData, newMessage],
+        newMessageText: ''
+      };
       return stateCopy;
-    }
-    case UPDATE_NEW_MESSAGE_TEXT: {
-      let stateCopy = {...state}
-      stateCopy.newMessageText = action.newMessageText;
+
+    case UPDATE_NEW_MESSAGE_TEXT:
+      stateCopy = {
+        ...state,
+        newMessageText: action.newMessageText
+      };
       console.log(stateCopy.newMessageText);
       return stateCopy;
-    }
+
     default:
       return state;
   }
@@ -48,7 +55,7 @@ const messengerPageReducer = (state=initialState, action) => {
 
 export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
 
-export const updateNewMessageTextActionCreator = (newText) => ({
+export const updateNewMessageTextActionCreator = newText => ({
   type: UPDATE_NEW_MESSAGE_TEXT,
   newMessageText: newText
 });
