@@ -24,7 +24,6 @@ let initialState = {
 
 const messengerPageReducer = (state = initialState, action) => {
   // debugger
-  let stateCopy
 
   switch (action.type) {
 
@@ -33,20 +32,18 @@ const messengerPageReducer = (state = initialState, action) => {
         id: state.messagesData.length + 1, //id counter imitation
         message: state.newMessageText,
       };
-      stateCopy = {
+      return {
         ...state,
         messagesData: [...state.messagesData, newMessage],
         newMessageText: ''
       };
-      return stateCopy;
 
     case UPDATE_NEW_MESSAGE_TEXT:
-      stateCopy = {
+      console.log('newMessageText: ' + action.newMessageText);
+      return {
         ...state,
         newMessageText: action.newMessageText
       };
-      console.log(stateCopy.newMessageText);
-      return stateCopy;
 
     default:
       return state;

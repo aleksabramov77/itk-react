@@ -10,7 +10,6 @@ let initialState = {
 }
 const profilePageReducer = (state = initialState, action) => {
   // debugger
-  let stateCopy
 
   switch (action.type) {
 
@@ -20,23 +19,18 @@ const profilePageReducer = (state = initialState, action) => {
         message: state.newPostText,
         likesCount: state.postsData.length + 1  //likes counter imitation
       };
-      stateCopy = {
+      return {
         ...state,
         postsData: [ ...state.postsData, newPost ],
         newPostText: ''
-      }
-      stateCopy.postsData = [...state.postsData]
-      stateCopy.postsData.push(newPost);
-      stateCopy.newPostText = '';
-      return stateCopy;
+      };
 
     case UPDATE_NEW_POST_TEXT:
-      stateCopy = {
+      console.log('newPostText: ' + action.newPostText);
+      return {
         ...state,
         newPostText: action.newPostText
-      }
-      console.log(stateCopy.newPostText);
-      return stateCopy;
+      };
 
     default:
       return state;
