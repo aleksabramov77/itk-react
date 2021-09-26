@@ -8,10 +8,8 @@ let mapStateToProps = state => ({
 })
 
 let mapDispatchToProps = dispatch => ({
-    functions: {
-        changeFollowing: userId => dispatch(changeFollowingAC(userId)),
-        setUsers: users => dispatch(setUsersAC(users))
-    }
+    changeFollowing: userId => dispatch(changeFollowingAC(userId)),
+    setUsers: users => dispatch(setUsersAC(users))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users)

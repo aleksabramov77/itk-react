@@ -1,11 +1,10 @@
 // import React from 'react'
 import User from './User/User'
+import axios from 'axios'
 
 const Users = (props) => {
-    debugger
-
     if (props.users.length === 0) {
-        props.functions.setUsers([
+        props.setUsers([
             {
                 id: 1,
                 followed: false,
@@ -35,12 +34,19 @@ const Users = (props) => {
                     city: 'Kiev'
                 },
                 status: 'I am a cat !!!'
-            },])
+            }
+            ])
     }
-    debugger
+
+    // axios
+    //     .get('https://social-network.samuraijs.com/api/1.0/users')
+    //     .then(response => {
+    //         debugger
+    //         props.setUsers(response.data.items)
+    //     })
 
     let users = props.users.map(u => <User
-        key={u.id} userData={u} changeFollowing={props.functions.changeFollowing}/>)
+        key={u.id} userData={u} changeFollowing={props.changeFollowing}/>)
 
     return (
         <div>

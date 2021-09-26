@@ -2,7 +2,38 @@ const CHANGE_FOLLOWING = 'CHANGE_FOLLOWING'
 const SET_USERS = 'SET_USERS'
 
 let initialState = {
-    users: []
+    users: [
+        // {
+        //     id: 1,
+        //     followed: false,
+        //     name: 'Vasily',
+        //     location: {
+        //         country: 'Belarus',
+        //         city: 'Minsk'
+        //     },
+        //     status: 'I like football !!!'
+        // },
+        // {
+        //     id: 2,
+        //     followed: true,
+        //     name: 'Petr',
+        //     location: {
+        //         country: 'Russia',
+        //         city: 'Penza'
+        //     },
+        //     status: 'I am a boss !!!'
+        // },
+        // {
+        //     id: 3,
+        //     followed: false,
+        //     name: 'Egor',
+        //     location: {
+        //         country: 'Ukraine',
+        //         city: 'Kiev'
+        //     },
+        //     status: 'I am a cat !!!'
+        // }
+    ]
 }
 const usersPageReducer = (state = initialState, action) => {
     // debugger
@@ -16,7 +47,7 @@ const usersPageReducer = (state = initialState, action) => {
             }
 
         case SET_USERS:
-            debugger
+            // debugger
             return {
                 ...state,
                 users: [...state.users, ...action.users]
@@ -25,9 +56,8 @@ const usersPageReducer = (state = initialState, action) => {
         default:
             return state
 
-
     }
-    debugger
+    // debugger
 }
 
 export const changeFollowingAC = userId => ({ type: CHANGE_FOLLOWING, userId })

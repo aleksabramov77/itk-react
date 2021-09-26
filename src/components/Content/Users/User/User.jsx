@@ -7,8 +7,8 @@ const User = (props) => {
         <div className={s.user}>
             <div className={s.name}>    {props.userData.name}    </div>
 
-            <div className={s.country}>    {props.userData.location.country}    </div>
-            <div className={s.city}>    {props.userData.location.city}    </div>
+            {/*<div className={s.country}>    {props.userData.location.country}    </div>*/}
+            {/*<div className={s.city}>    {props.userData.location.city}    </div>*/}
 
             <div className={s.status}>    {props.userData.status}    </div>
 
