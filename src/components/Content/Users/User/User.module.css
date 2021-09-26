@@ -4,16 +4,19 @@
     margin: 10px;
     padding: 5px;
     display: grid;
-    height: 10vh;
-    grid-template-columns: 1fr 5fr 1fr;
+    /*height: 10vh;*/
+    grid-template-columns: 2fr 5fr 1fr;
     grid-template-rows: 5fr 1fr;
     grid-gap: 5px;
-    grid-template-areas: 'name NONE city '
-    'foll stat coun';
+    grid-template-areas:
+            'name NONE city '
+            'foll stat coun';
 }
 
 .name {
     grid-area: name;
+    align-self: center;
+    text-align: center;
 }
 
 .status {
@@ -22,6 +25,8 @@
 
 .followed {
     grid-area: foll;
+    text-align: center;
+
 }
 
 .country {
@@ -30,4 +35,8 @@
 
 .city {
     grid-area: city;
+}
+
+.avatar {
+    width: 100%;
 }
