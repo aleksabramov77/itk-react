@@ -7,7 +7,7 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 let initialState = {
     users: [
     ],
-    totalUsersCount: 21,
+    totalUsersCount: 0,
     usersOnPage: 20,
     currentPage: 1
 }

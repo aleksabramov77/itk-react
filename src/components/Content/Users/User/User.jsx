@@ -1,4 +1,3 @@
-import React from 'react'
 import s from './User.module.css'
 import defaultAvatar from '../../../../assets/images/defaultAvatar.png'
 
@@ -7,7 +6,9 @@ const User = (props) => {
     return (
         <div className={s.user}>
             <div className={s.name}>
-            <img className={s.avatar}  src={props.userData.photos.small ? props.userData.photos.small : defaultAvatar}/>
+                <img className={s.avatar}
+                     alt='userAvatar'
+                     src={props.userData.photos.small ? props.userData.photos.small : defaultAvatar}/>
                 {props.userData.name}
             </div>
 

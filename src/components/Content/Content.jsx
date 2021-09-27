@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import {Route} from "react-router-dom";
 import s from "./Content.module.css";
 import Profile from "./Profile/Profile";
