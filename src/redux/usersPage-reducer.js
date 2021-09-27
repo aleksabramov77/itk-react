@@ -1,39 +1,15 @@
 const CHANGE_FOLLOWING = 'CHANGE_FOLLOWING'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+
 
 let initialState = {
     users: [
-        // {
-        //     id: 1,
-        //     followed: false,
-        //     name: 'Vasily',
-        //     location: {
-        //         country: 'Belarus',
-        //         city: 'Minsk'
-        //     },
-        //     status: 'I like football !!!'
-        // },
-        // {
-        //     id: 2,
-        //     followed: true,
-        //     name: 'Petr',
-        //     location: {
-        //         country: 'Russia',
-        //         city: 'Penza'
-        //     },
-        //     status: 'I am a boss !!!'
-        // },
-        // {
-        //     id: 3,
-        //     followed: false,
-        //     name: 'Egor',
-        //     location: {
-        //         country: 'Ukraine',
-        //         city: 'Kiev'
-        //     },
-        //     status: 'I am a cat !!!'
-        // }
-    ]
+    ],
+    totalUsersCount: 21,
+    usersOnPage: 20,
+    currentPage: 1
 }
 const usersPageReducer = (state = initialState, action) => {
     // debugger
@@ -47,11 +23,25 @@ const usersPageReducer = (state = initialState, action) => {
             }
 
         case SET_USERS:
+            return {
+                ...state,
+                users: action.users
+            }
+
+        case SET_CURRENT_PAGE:
             // debugger
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                currentPage: action.currentPage,
             }
+
+        case SET_TOTAL_USERS_COUNT:
+            // debugger
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount,
+            }
+
 
         default:
             return state
@@ -62,6 +52,10 @@ const usersPageReducer = (state = initialState, action) => {
 
 export const changeFollowingAC = userId => ({ type: CHANGE_FOLLOWING, userId })
 
-export const setUsersAC = (users) => ({ type: SET_USERS, users })
+export const setUsersAC = users => ({ type: SET_USERS, users })
+
+export const setCurrentPageAC = currentPage => ({ type: SET_CURRENT_PAGE, currentPage })
+
+export const setTotalUsersCountAC = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
 
 export default usersPageReducer
