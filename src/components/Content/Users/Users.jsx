@@ -1,5 +1,6 @@
 import User from './User/User'
 import s from './Users.module.css'
+import React from 'react'
 
 const Users = (props) => {
         let pagesQuantity = Math.ceil(props.totalUsersCount / props.usersOnPage)
@@ -16,8 +17,10 @@ const Users = (props) => {
                     {pageNumbersArray.map(p => (
                         <button
                             key={p}
+                            disabled = {props.currentPage === p}
                             className={`${s.pageNumberButton}  ${p === props.currentPage ? s.currentPage : ''}`}
-                            onClick={() => props.onPageChanged(p)}>
+                            onClick={() => props.onPageChanged(p)}
+                        >
                             {p}
                         </button>))}
                 </div>
