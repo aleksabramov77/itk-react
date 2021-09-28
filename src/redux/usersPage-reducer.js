@@ -59,10 +59,10 @@ const usersPageReducer = (state = initialState, action) => {
     // debugger
 }
 
-export const changeFollowingAC = userId => ({ type: CHANGE_FOLLOWING, userId })
-export const setUsersAC = users => ({ type: SET_USERS, users })
-export const setCurrentPageAC = currentPage => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setTotalUsersCountAC = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
-export const toggleFetchingAC = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
+export const changeFollowing = userId => ({ type: CHANGE_FOLLOWING, userId })
+export const setUsers = users => ({ type: SET_USERS, users })
+export const setCurrentPage = currentPage => ({ type: SET_CURRENT_PAGE, currentPage })
+export const setTotalUsersCount = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
+export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
 export default usersPageReducer
