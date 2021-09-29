@@ -3,12 +3,14 @@ import profilePageReducer from "./profilePage-reducer";
 import messengerPageReducer from "./messengerPage-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersPageReducer from './usersPage-reducer'
+import authReducer from './auth-reducer'
 
 let reducers = combineReducers({
   profilePage: profilePageReducer,
   messengerPage: messengerPageReducer,
   usersPage: usersPageReducer,
-  sidebar: sidebarReducer
+  sidebar: sidebarReducer,
+  auth: authReducer,
 });
 
 let store = createStore(reducers);

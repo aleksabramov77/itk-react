@@ -14,7 +14,11 @@
     grid-area: avatar;
     border-radius: 5px;
     /*padding: 0px;*/
-    width: 100px;
+    width: 50%;
+}
+
+.profileAvatar {
+    width: 100%;
 }
 
 .fullNameBlock {

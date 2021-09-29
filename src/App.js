@@ -1,9 +1,9 @@
-// import React from 'react';
+import React from 'react'
 import s from './App.module.css';
-import {BrowserRouter} from 'react-router-dom';
-import Header from './components/Header/Header';
+import { BrowserRouter, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar';
 import Content from "./components/Content/Content";
+import HeaderContainer from './components/Header/HeaderContainer'
 
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className={s.appWrapper}>
-        <div className={s.block + ' ' + s.header}><Header /></div>
+        <div className={s.block + ' ' + s.header}><HeaderContainer /></div>
         <div className={s.block + ' ' + s.navbar}><Navbar /></div>
         <div className={s.block + ' ' + s.content}><Content /></div>
       </div>
@@ -20,3 +20,5 @@ const App = () => {
 };
 
 export default App;
+
+

@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
         let userId = this.props.match.params.userId
         this.props.toggleFetching(true)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId ? userId : 2}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId ? userId : this.props.authId}`)
             .then(response => {
                 this.props.setUserProfileData(response.data)
                 this.props.toggleFetching(false)
@@ -26,13 +26,13 @@ class ProfileContainer extends React.Component {
     render () {
         // debugger
         return (
-            <>
+            <div>
                 {this.props.isFetching ? <Preloader/> : null}
                 <Profile
                     userProfile={this.props.userProfile}
                     // smallPhoto={this.props.smallPhoto}
                 />
-            </>
+            </div>
         )
     }
 }
@@ -44,6 +44,7 @@ let mapStateToProps = state => {
         userProfile: state.profilePage.userProfile,
         // smallPhoto: state.profilePage.userProfile.photos.small,
         isFetching: state.usersPage.isFetching,
+        authId: state.auth.id,
 
     }
 }
