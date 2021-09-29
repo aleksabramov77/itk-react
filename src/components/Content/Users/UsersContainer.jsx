@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-    changeFollowing,
+    follow,
+    unfollow,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleFetching
+    toggleFetching,
 } from '../../../redux/usersPage-reducer'
 import * as axios from 'axios'
 import Users from './Users'
@@ -15,7 +16,9 @@ class UsersContainer extends React.Component {
     componentDidMount () {
         this.props.toggleFetching(true)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${this.props.currentPage}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${this.props.currentPage}`, {
+                withCredentials: true,
+            })
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -27,7 +30,9 @@ class UsersContainer extends React.Component {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleFetching(true)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${pageNumber}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${pageNumber}`, {
+                withCredentials: true,
+            })
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -40,11 +45,12 @@ class UsersContainer extends React.Component {
             <>
                 {this.props.isFetching ? <Preloader/> : null}
                 <Users
-                    users={this.props.users}
-                    totalUsersCount={this.props.totalUsersCount}
-                    usersOnPage={this.props.usersOnPage}
-                    currentPage={this.props.currentPage}
-                    changeFollowing={this.props.changeFollowing}
+                    {...this.props}
+                    // users={this.props.users}
+                    // totalUsersCount={this.props.totalUsersCount}
+                    // usersOnPage={this.props.usersOnPage}
+                    // currentPage={this.props.currentPage}
+                    // changeFollowing={this.props.changeFollowing}
                     onPageChanged={this.onPageChanged}
                 />
             </>
@@ -62,7 +68,8 @@ let mapStateToProps = state => ({
 
 export default connect(mapStateToProps,
     {
-        changeFollowing,
+        follow,
+        unfollow,
         setUsers,
         setCurrentPage,
         setTotalUsersCount,

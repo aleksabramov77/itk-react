@@ -1,4 +1,5 @@
-const CHANGE_FOLLOWING = 'CHANGE_FOLLOWING'
+const FOLLOW = 'FOLLOW'
+const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
@@ -19,10 +20,16 @@ const usersPageReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case CHANGE_FOLLOWING:
+        case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userId ? { ...u, followed: !(u.followed) } : u)
+                users: state.users.map(u => u.id === action.userId ? { ...u, followed: true } : u)
+            }
+
+        case UNFOLLOW:
+            return {
+                ...state,
+                users: state.users.map(u => u.id === action.userId ? { ...u, followed: false } : u)
             }
 
         case SET_USERS:
@@ -59,7 +66,8 @@ const usersPageReducer = (state = initialState, action) => {
     // debugger
 }
 
-export const changeFollowing = userId => ({ type: CHANGE_FOLLOWING, userId })
+export const follow = userId => ({ type: FOLLOW, userId })
+export const unfollow = userId => ({ type: UNFOLLOW, userId })
 export const setUsers = users => ({ type: SET_USERS, users })
 export const setCurrentPage = currentPage => ({ type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })

@@ -10,25 +10,25 @@ const Users = (props) => {
         else for (let i = props.currentPage - 2; i <= props.currentPage + 2; i++) pageNumbersArray.push(i)
         pageNumbersArray.push(pagesQuantity)
 
-    // debugger
     return (
             <div>
                 <div className={s.pageSelector}>
                     {pageNumbersArray.map(p => (
                         <button
-                            key={p}
-                            disabled = {props.currentPage === p}
-                            className={`${s.pageNumberButton}  ${p === props.currentPage ? s.currentPage : ''}`}
-                            onClick={() => props.onPageChanged(p)}
-                        >
-                            {p}
-                        </button>))}
+                                key={p}
+                                disabled={props.currentPage === p}
+                                className={`${s.pageNumberButton}  ${p === props.currentPage ? s.currentPage : ''}`}
+                                onClick={() => props.onPageChanged(p)}
+                            >
+                                {p}
+                            </button>)
+
+                    )}
                 </div>
                 {props.users.map(u => <User
                     key={u.id} userData={u}
-                    changeFollowing={props.changeFollowing}/>)}
+                    follow={props.follow} unfollow={props.unfollow}/>)}
             </div>)
     }
-
 
 export default Users
