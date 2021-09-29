@@ -13,7 +13,7 @@
 .profileAvatarBlock {
     grid-area: avatar;
     border-radius: 5px;
-    padding: 0px;
+    /*padding: 0px;*/
     width: 100px;
 }
 
