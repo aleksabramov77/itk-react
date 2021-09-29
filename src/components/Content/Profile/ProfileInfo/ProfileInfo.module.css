@@ -1,9 +1,43 @@
-.profileAvatar img {
-  border-radius: 5px;
-  padding: 0px;
-  width: 100px;
+.profileMainBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    'avatar contac'
+    'fulNam contac'
+    'aboutM contac'
+    'jobDes contac'
+    'lookJb NNNNNN';
 }
 
-.descriptionBlock {
-  
+.profileAvatarBlock {
+    grid-area: avatar;
+    border-radius: 5px;
+    padding: 0px;
+    width: 100px;
+}
+
+.fullNameBlock {
+    grid-area: fulNam;
+    font-weight: 700;
+}
+
+.aboutMeBlock {
+    grid-area: aboutM;
+    font-size: small;
+}
+
+.lookingForAJobDescriptionBlock {
+    grid-area: jobDes;
+    font-weight: bold;
+
+}
+
+.lookingForAJobBlock {
+    grid-area: lookJb;
+}
+
+.contactsBlock {
+    grid-area: contac;
+    align-self: end;
 }

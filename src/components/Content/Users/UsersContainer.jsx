@@ -67,5 +67,4 @@ export default connect(mapStateToProps,
         setCurrentPage,
         setTotalUsersCount,
         toggleFetching,
-    }
-    )(UsersContainer)
+    })(UsersContainer)
