@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
                     alt='userAvatar'
                     src={props.userProfile.photos.small ? props.userProfile.photos.small : defaultAvatar}/>
             </div>
-            <div className={s.fullNameBlock}>{props.userProfile.fullName}</div>
+            <div className={s.fullNameBlock}>{props.userProfile.fullName}<br/>{props.userProfile.userId}</div>
             <div className={s.aboutMeBlock}>{props.userProfile.aboutMe}</div>
             <div className={s.lookingForAJobDescriptionBlock}>{props.userProfile.lookingForAJobDescription}</div>
             <div className={s.lookingForAJobBlock}>{props.userProfile.lookingForAJob}</div>

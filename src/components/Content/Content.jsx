@@ -14,8 +14,8 @@ const Content = () => {
         <div className={s.appWrapperContent}>
             <div className={s.contentHeadImage}/>
             <div className={s.dynamicContent}>
-                <Route exact path="/" render={() => <ProfileContainer/>}/>
-                <Route exact path="/profile" render={() => <ProfileContainer/>}/>
+                {/*<Route exact path="/" render={() => <ProfileContainer/>}/>*/}
+                {/*<Route exact path="/profile" render={() => <ProfileContainer/>}/>*/}
                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                 <Route path="/messenger" render={() => <MessengerContainer/>}/>
                 <Route path="/users" render={() => <UsersContainer/>}/>

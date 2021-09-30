@@ -1,24 +1,21 @@
 import React from 'react'
-// import s from './Header.module.css'
 import Header from './Header'
 import { connect } from 'react-redux'
-import * as axios from 'axios'
 import { setAuthUserData } from '../../redux/auth-reducer'
 import { toggleFetching } from '../../redux/usersPage-reducer'
 import Preloader from '../common/Preloader/Preloader'
+import { usersAPI } from '../../api/api'
 
 class HeaderContainer extends React.Component {
     componentDidMount () {
         this.props.toggleFetching(true)
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let { id, email, login } = response.data.data
+        usersAPI.authMe()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let { id, email, login } = data.data
                     this.props.setAuthUserData(id, email, login)
                 }
                 this.props.toggleFetching(false)
-                // debugger
             })
     }
 
@@ -40,4 +37,4 @@ let mapStateToProps = (state) => ({
     isFetching: state.auth.isFetching,
     isAuth: state.auth.isAuth,
 })
-export default connect(mapStateToProps, {setAuthUserData, toggleFetching})(HeaderContainer)
+export default connect(mapStateToProps, { setAuthUserData, toggleFetching })(HeaderContainer)

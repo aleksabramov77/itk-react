@@ -5,11 +5,8 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
-
-
 let initialState = {
-    users: [
-    ],
+    users: [],
     totalUsersCount: 0,
     usersOnPage: 20,
     currentPage: 1,
@@ -39,7 +36,7 @@ const usersPageReducer = (state = initialState, action) => {
             }
 
         case SET_CURRENT_PAGE:
-            // debugger
+            // console.log(action.currentPage)
             return {
                 ...state,
                 currentPage: action.currentPage,
@@ -57,7 +54,6 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching,
             }
-
 
         default:
             return state

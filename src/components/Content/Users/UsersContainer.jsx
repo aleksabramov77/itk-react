@@ -8,34 +8,34 @@ import {
     setUsers,
     toggleFetching,
 } from '../../../redux/usersPage-reducer'
-import * as axios from 'axios'
 import Users from './Users'
 import Preloader from '../../common/Preloader/Preloader'
+import { usersAPI } from '../../../api/api'
 
 class UsersContainer extends React.Component {
     componentDidMount () {
         this.props.toggleFetching(true)
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${this.props.currentPage}`, {
-                withCredentials: true,
-            })
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+
+        usersAPI.getUsers(this.props.usersOnPage, this.props.currentPage)
+            .then(data => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+
                 this.props.toggleFetching(false)
             })
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
+
         this.props.toggleFetching(true)
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${pageNumber}`, {
-                withCredentials: true,
-            })
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+        // console.log(this.props.currentPage)
+
+        usersAPI.getUsers(this.props.usersOnPage, pageNumber)
+            .then(data => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+
                 this.props.toggleFetching(false)
             })
     }
@@ -46,11 +46,6 @@ class UsersContainer extends React.Component {
                 {this.props.isFetching ? <Preloader/> : null}
                 <Users
                     {...this.props}
-                    // users={this.props.users}
-                    // totalUsersCount={this.props.totalUsersCount}
-                    // usersOnPage={this.props.usersOnPage}
-                    // currentPage={this.props.currentPage}
-                    // changeFollowing={this.props.changeFollowing}
                     onPageChanged={this.onPageChanged}
                 />
             </>
