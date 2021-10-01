@@ -22,14 +22,14 @@ const User = (props) => {
             <div className={s.followed}>
                 {props.userData.followed ?
                     <button
-                        disabled={props.followingInProgress.some(id => id === props.userData.id)}
+                        disabled={props.followingInProgress.some(id => id === props.userData.id)} // проверка id на наличие в текущий мемент запроса на сервер (если есть кнопку Дизэйблим)
                         onClick={() => {
-                            props.toggleFollowing(true, props.userData.id)
-                            usersAPI.unfollowUser(props.userData.id)
-                                .then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.unfollow(props.userData.id)
-                                        props.toggleFollowing(false, props.userData.id)
+                            props.toggleFollowing(true, props.userData.id) // диспатчим в стор инфу, что начался запрос на сервер и id пользователя, по которому идет запрос
+                            usersAPI.unfollowUser(props.userData.id) // запускаем функцию DAL уровня
+                                .then(data => {  // получив ответ от сервера ...
+                                    if (data.resultCode === 0) {  // проверяем, что статус ОК
+                                        props.unfollow(props.userData.id) // диспатчим в стор инфу что мы отписались
+                                        props.toggleFollowing(false, props.userData.id)  // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
                                     }
                                 })
                         }}
