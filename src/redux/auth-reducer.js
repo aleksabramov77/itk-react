@@ -1,11 +1,11 @@
-import { usersAPI } from '../api/api'
+import { authAPI } from '../api/api'
 
 const SET_USER = 'SET_USER'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 
 let initialState = {
-    id: null,
+    id: 18808,
     email: null,
     login: null,
     isFetching: true,
@@ -40,9 +40,9 @@ export const setAuthUserData = (id, email, login) => ({ type: SET_USER, data: {i
 export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
 
-export const authMe = () => dispatch => {
+export const getAuthUserData = () => dispatch => {
     dispatch(toggleFetching(true))
-    usersAPI.authMe()
+    authAPI.me()
         .then(data => {
             if (data.resultCode === 0) {
                 let { id, email, login } = data.data

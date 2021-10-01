@@ -69,7 +69,6 @@ export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching
 export const toggleFollowing = (following, id) => ({ type: TOGGLE_FOLLOWING, following, id })
 
 export const getUsers = (usersOnPage, currentPage) => dispatch => {
-    // debugger
     dispatch(toggleFetching(true))
     usersAPI.getUsers(usersOnPage, currentPage)
         .then(data => {

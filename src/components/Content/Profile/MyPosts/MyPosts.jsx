@@ -11,6 +11,7 @@ const MyPosts = (props) => {
       key={p.id}
       message={p.message}
       likesCount={p.likesCount}
+
     />
   ));
 

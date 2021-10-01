@@ -39,7 +39,7 @@ const messengerPageReducer = (state = initialState, action) => {
       };
 
     case UPDATE_NEW_MESSAGE_TEXT:
-      console.log('newMessageText: ' + action.newMessageText);
+      // console.log('newMessageText: ' + action.newMessageText);
       return {
         ...state,
         newMessageText: action.newMessageText

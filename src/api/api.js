@@ -13,28 +13,26 @@ const instance = axios.create({
 //         .then(response => response.data)
 // }
 
-export const usersAPI ={
+export const usersAPI = {
     getUsers (usersOnPage = 10, currentPage = 1) {
         return instance.get(`users?count=${usersOnPage}&page=${currentPage}`)
             .then(response => response.data)
     },
-
     unfollowUser (userId) {
-        return instance.delete(`follow/${userId}`).
-        then(response => response.data)
+        return instance.delete(`follow/${userId}`).then(response => response.data)
     },
-
     followUser (userId) {
         return instance.post(`follow/${userId}`, {})
             .then(response => response.data)
     },
 
-    authMe () {
+}
+export const authAPI = {
+    me () {
+        // debugger
         return instance.get(`auth/me`)
             .then(response => response.data)
-
     },
-
     authLogIn (email, password, rememberMe=false, captcha=true) {
         return instance.post(`auth/login`, {
             email: email,
@@ -45,3 +43,12 @@ export const usersAPI ={
             .then(response => response.data)
     },
 }
+
+export const profileAPI = {
+    getProfile (userId, authId) {
+        return instance.get(`profile/${userId ? userId : authId}`)
+            .then(response => response.data)
+    }
+}
+
+
