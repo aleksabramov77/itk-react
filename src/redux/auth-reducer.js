@@ -1,11 +1,14 @@
+import { usersAPI } from '../api/api'
+
 const SET_USER = 'SET_USER'
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 
 let initialState = {
     id: null,
     email: null,
     login: null,
-    isFetching: false,
+    isFetching: true,
     isAuth: false,
 }
 
@@ -21,7 +24,11 @@ const authReducer = (state = initialState, action) => {
                 ...action.data,
                 isAuth: true,
             }
-
+        case TOGGLE_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching,
+            }
         default:
             return state
 
@@ -30,6 +37,20 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (id, email, login) => ({ type: SET_USER, data: {id, email, login} })
+export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
+
+
+export const authMe = () => dispatch => {
+    dispatch(toggleFetching(true))
+    usersAPI.authMe()
+        .then(data => {
+            if (data.resultCode === 0) {
+                let { id, email, login } = data.data
+                dispatch(setAuthUserData(id, email, login))
+            }
+            dispatch(toggleFetching(false))
+        })
+}
 
 
 export default authReducer

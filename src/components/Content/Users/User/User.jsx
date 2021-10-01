@@ -2,7 +2,6 @@ import React from 'react'
 import s from './User.module.css'
 import defaultAvatar from '../../../../assets/images/defaultAvatar.png'
 import { NavLink } from 'react-router-dom'
-import { usersAPI } from '../../../../api/api'
 
 const User = (props) => {
 // debugger
@@ -23,35 +22,13 @@ const User = (props) => {
                 {props.userData.followed ?
                     <button
                         disabled={props.followingInProgress.some(id => id === props.userData.id)} // проверка id на наличие в текущий мемент запроса на сервер (если есть кнопку Дизэйблим)
-                        onClick={() => {
-                            props.toggleFollowing(true, props.userData.id) // диспатчим в стор инфу, что начался запрос на сервер и id пользователя, по которому идет запрос
-                            usersAPI.unfollowUser(props.userData.id) // запускаем функцию DAL уровня
-                                .then(data => {  // получив ответ от сервера ...
-                                    if (data.resultCode === 0) {  // проверяем, что статус ОК
-                                        props.unfollow(props.userData.id) // диспатчим в стор инфу что мы отписались
-                                        props.toggleFollowing(false, props.userData.id)  // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
-                                    }
-                                })
-                        }}
-                        className={s.followButton}>
-                        Unfollow
-                    </button>
+                        onClick={() => props.unfollowUser(props.userData.id)}
+                        className={s.followButton}> Unfollow </button>
                     :
                     <button
                         disabled={props.followingInProgress.some(id => id === props.userData.id)}
-                        onClick={() => {
-                            props.toggleFollowing(true, props.userData.id)
-                            usersAPI.followUser(props.userData.id)
-                                .then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.follow(props.userData.id)
-                                        props.toggleFollowing(false, props.userData.id)
-                                    }
-                                })
-                        }}
-                        className={s.followButton}>
-                        Follow
-                    </button>
+                        onClick={() => props.followUser(props.userData.id)}
+                        className={s.followButton}> Follow </button>
                 }
             </div>
         </div>

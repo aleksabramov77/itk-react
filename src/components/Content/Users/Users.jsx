@@ -13,6 +13,7 @@ const Users = (props) => {
 // debugger
     return (
             <div>
+
                 <div className={s.pageSelector}>
                     {pageNumbersArray.map(p => (
                         <button
@@ -28,9 +29,9 @@ const Users = (props) => {
                 </div>
                 {props.users.map(u => <User
                     key={u.id} userData={u}
-                    follow={props.follow} unfollow={props.unfollow}
+                    followUser={props.followUser} unfollowUser={props.unfollowUser}
                     followingInProgress={props.followingInProgress}
-                    toggleFollowing={props.toggleFollowing}/>)}
+                />)}
             </div>)
     }
 
