@@ -1,20 +1,10 @@
-import React from "react";
-import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../../../redux/messengerPage-reducer'
+import React from 'react'
+import { addMessage, updateNewMessageText } from '../../../redux/messengerPage-reducer'
 import Messenger from './Messenger'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 
-class MessengerContainer extends React.Component {
 
-    render () {
-
-        if (!this.props.isAuth) return <Redirect to='/login'/>
-
-        return (
-            <Messenger {...this.props}/>
-        )
-    }
-}
 
 let mapStateToProps = state => ({
     dialogs: state.messengerPage.dialogsData,
@@ -23,9 +13,6 @@ let mapStateToProps = state => ({
     isAuth: state.auth.isAuth,
 })
 
-let mapDispatchToProps = dispatch => ({
-    addMessage: () => dispatch(addMessageActionCreator()),
-    updateNewMessageText: newText => dispatch(updateNewMessageTextActionCreator(newText))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessengerContainer)
+export default connect(mapStateToProps, {
+    addMessage, updateNewMessageText,
+})(withAuthRedirect(Messenger))

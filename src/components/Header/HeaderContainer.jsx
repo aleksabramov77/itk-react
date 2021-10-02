@@ -5,7 +5,8 @@ import { getAuthUserData } from '../../redux/auth-reducer'
 import Preloader from '../common/Preloader/Preloader'
 
 class HeaderContainer extends React.Component {
-   componentDidMount () {
+
+    componentDidMount () {
         this.props.getAuthUserData()
     }
 

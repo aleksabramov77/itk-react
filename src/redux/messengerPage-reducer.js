@@ -23,10 +23,7 @@ let initialState = {
 
 
 const messengerPageReducer = (state = initialState, action) => {
-  // debugger
-
-  switch (action.type) {
-
+   switch (action.type) {
     case ADD_MESSAGE:
       let newMessage = {
         id: state.messagesData.length + 1, //id counter imitation
@@ -37,22 +34,18 @@ const messengerPageReducer = (state = initialState, action) => {
         messagesData: [...state.messagesData, newMessage],
         newMessageText: ''
       };
-
     case UPDATE_NEW_MESSAGE_TEXT:
-      // console.log('newMessageText: ' + action.newMessageText);
       return {
         ...state,
         newMessageText: action.newMessageText
       };
-
     default:
       return state;
   }
 };
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export const updateNewMessageTextActionCreator = newMessageText => ({
+export const addMessage = () => ({type: ADD_MESSAGE});
+export const updateNewMessageText = newMessageText => ({
   type: UPDATE_NEW_MESSAGE_TEXT,
   newMessageText
 });

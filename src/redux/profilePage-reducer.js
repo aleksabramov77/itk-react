@@ -97,7 +97,6 @@ export const updateNewPostText = newPostText => ({ type: UPDATE_NEW_POST_TEXT, n
 export const setUserProfileData = userProfile => ({ type: SET_USER_PROFILE_DATA, userProfile })
 export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
-
 export const getUserProfile = (userId, authId) => dispatch => {
     toggleFetching(true)
     profileAPI.getProfile(userId, authId)
@@ -106,8 +105,6 @@ export const getUserProfile = (userId, authId) => dispatch => {
             dispatch(toggleFetching(false))
         })
 }
-// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
-// export const setCurrentUser = userId => ({ type: SET_CURRENT_USER, userId })
 
 
 

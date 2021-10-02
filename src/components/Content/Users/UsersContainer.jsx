@@ -5,7 +5,7 @@ import {
     getUsers, unfollowUser, followUser,
 } from '../../../redux/usersPage-reducer'
 import Users from './Users'
-import Preloader from '../../common/Preloader/Preloader'
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 
 class UsersContainer extends React.Component {
     componentDidMount () {
@@ -19,16 +19,14 @@ class UsersContainer extends React.Component {
 
     render () {
         return (
-            <>
-                {this.props.isFetching ? <Preloader/> : null}
-                <Users
-                    {...this.props}
-                    onPageChanged={this.onPageChanged}
-                />
-            </>
+            <Users
+                {...this.props}
+                onPageChanged={this.onPageChanged}
+            />
         )
     }
 }
+
 
 let mapStateToProps = state => ({
     users: state.usersPage.users,
@@ -38,10 +36,7 @@ let mapStateToProps = state => ({
     followingInProgress: state.usersPage.followingInProgress,
 })
 
-export default connect(mapStateToProps,
-    {
-        setCurrentPage,
-        getUsers,
-        unfollowUser,
-        followUser,
-    })(UsersContainer)
+export default connect(mapStateToProps, {
+    setCurrentPage, getUsers,
+    unfollowUser, followUser,
+})(withAuthRedirect(UsersContainer))
