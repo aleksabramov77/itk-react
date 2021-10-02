@@ -5,7 +5,7 @@ const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 
 let initialState = {
-    id: 18808,
+    id: null,
     email: null,
     login: null,
     isFetching: true,
