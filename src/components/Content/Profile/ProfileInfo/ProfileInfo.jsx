@@ -1,6 +1,7 @@
 // import React from "react";
 import s from './ProfileInfo.module.css'
 import defaultAvatar from '../../../../assets/images/defaultAvatar.png'
+import ProfileStatus from './ProfileStatus/ProfileStatus'
 
 const ProfileInfo = (props) => {
     return (
@@ -25,6 +26,9 @@ const ProfileInfo = (props) => {
                 <div className={s.contactsYoutubeBlock}>{props.userProfile.contacts.youtube}</div>
                 <div className={s.contactsGithubBlock}>{props.userProfile.contacts.github}</div>
                 <div className={s.contactsMainLinkBlock}>{props.userProfile.contacts.mainLink}</div>
+            </div>
+            <div className={s.profileStatusBlock} >
+                <ProfileStatus  status='My status'/>
             </div>
 
 
