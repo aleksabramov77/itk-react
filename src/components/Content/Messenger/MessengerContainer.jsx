@@ -3,6 +3,7 @@ import { addMessage, updateNewMessageText } from '../../../redux/messengerPage-r
 import Messenger from './Messenger'
 import { connect } from 'react-redux'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 
 
@@ -13,6 +14,7 @@ let mapStateToProps = state => ({
     isAuth: state.auth.isAuth,
 })
 
-export default connect(mapStateToProps, {
+export default compose (connect(mapStateToProps, {
     addMessage, updateNewMessageText,
-})(withAuthRedirect(Messenger))
+}),withAuthRedirect)
+(Messenger)

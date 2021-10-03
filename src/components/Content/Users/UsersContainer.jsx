@@ -6,6 +6,7 @@ import {
 } from '../../../redux/usersPage-reducer'
 import Users from './Users'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 class UsersContainer extends React.Component {
     componentDidMount () {
@@ -36,7 +37,8 @@ let mapStateToProps = state => ({
     followingInProgress: state.usersPage.followingInProgress,
 })
 
-export default connect(mapStateToProps, {
+export default compose (connect(mapStateToProps, {
     setCurrentPage, getUsers,
     unfollowUser, followUser,
-})(withAuthRedirect(UsersContainer))
+}),withAuthRedirect)
+(UsersContainer)
