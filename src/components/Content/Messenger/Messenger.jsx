@@ -1,7 +1,6 @@
 import s from './Messenger.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-import { Redirect } from 'react-router-dom'
 import React from 'react'
 
 const Messenger = props => {

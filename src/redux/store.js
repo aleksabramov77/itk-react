@@ -1,6 +1,6 @@
-import profilePageReducer from "./profilePage-reducer";
-import messengerPageReducer from "./messengerPage-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import profilePageReducer from "./profilePageReducer";
+import messengerPageReducer from "./messengerPageReducer";
+import sidebarReducer from "./sidebarReducer";
 
 
 let store = {

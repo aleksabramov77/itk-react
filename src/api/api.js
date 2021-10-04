@@ -8,30 +8,38 @@ const instance = axios.create({
     }
 })
 
-// export const getUsers = (currentPage = 1, usersOnPage = 10) => {
-//     return instance.get(`users?count=${usersOnPage}&page=${currentPage}`)
-//         .then(response => response.data)
-// }
-
 export const usersAPI = {
     getUsers (usersOnPage = 10, currentPage = 1) {
         return instance.get(`users?count=${usersOnPage}&page=${currentPage}`)
-            .then(response => response.data)
     },
     unfollowUser (userId) {
-        return instance.delete(`follow/${userId}`).then(response => response.data)
+        return instance.delete(`follow/${userId}`)
     },
     followUser (userId) {
         return instance.post(`follow/${userId}`, {})
-            .then(response => response.data)
     },
+    getProfile (userId, authId) {
+        console.warn('Obsolete method" Please profileAPI object')
+        return profileAPI.getProfile(userId, authId) // Для сохранения backward compatibility ставляем возможность использовать запросы сюда
+    }
 
 }
+
+export const profileAPI = {
+    getProfile (userId) {
+        return instance.get(`profile/${userId}`)
+    },
+    getUserStatus (userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateUserStatus (status) {
+        return instance.put(`profile/status`, {status: status})
+    }
+}
+
 export const authAPI = {
     me () {
-        // debugger
         return instance.get(`auth/me`)
-            .then(response => response.data)
     },
     authLogIn (email, password, rememberMe=false, captcha=true) {
         return instance.post(`auth/login`, {
@@ -40,15 +48,9 @@ export const authAPI = {
             rememberMe: rememberMe,
             captcha: captcha
         })
-            .then(response => response.data)
     },
 }
 
-export const profileAPI = {
-    getProfile (userId, authId) {
-        return instance.get(`profile/${userId ? userId : authId}`)
-            .then(response => response.data)
-    }
-}
+
 
 

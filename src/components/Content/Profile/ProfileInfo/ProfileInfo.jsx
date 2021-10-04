@@ -2,8 +2,14 @@
 import s from './ProfileInfo.module.css'
 import defaultAvatar from '../../../../assets/images/defaultAvatar.png'
 import ProfileStatus from './ProfileStatus/ProfileStatus'
+import React from 'react'
+import Preloader from '../../../common/Preloader/Preloader'
 
 const ProfileInfo = (props) => {
+    if(!props.userProfile.userId) {
+        return <Preloader  />
+    }
+
     return (
         <div className={s.profileMainBlock}>
             <div className={s.profileAvatarBlock}>
@@ -27,8 +33,9 @@ const ProfileInfo = (props) => {
                 <div className={s.contactsGithubBlock}>{props.userProfile.contacts.github}</div>
                 <div className={s.contactsMainLinkBlock}>{props.userProfile.contacts.mainLink}</div>
             </div>
-            <div className={s.profileStatusBlock} >
-                <ProfileStatus  status='My status'/>
+            <div className={s.profileStatusBlock}>
+                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}
+                />
             </div>
 
 

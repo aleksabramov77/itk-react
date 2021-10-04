@@ -2,36 +2,51 @@ import React from 'react'
 import s from './ProfileStatus.module.css'
 
 class ProfileStatus extends React.Component {
+    // statusInputRef = React.createRef()
+
     state = {                           // локальный стэйт  классовой компоненты
-        editMode: false
+        editMode: false,
+        status: this.props.status,
+
     }
 
-    activateEditMode () {
+    activateEditMode = () => {
+        console.warn('this.state.editMode')
         this.setState({           // метод Реакта изменяющий локальный стэйт классовой компоненты
             editMode: true
         })
     }
 
-    deactivateEditMode () {
+    deactivateEditMode = () => {
         this.setState({           // метод Реакта изменяющий локальный стэйт классовой компоненты
-            editMode: false
+            editMode: false,
         })
+        this.props.updateUserStatus(this.state.status )
+    }
+
+    onStatusChange = (e) => {
+        this.setState({ status: e.currentTarget.value })
     }
 
     render () {
+        // debugger
         return (
             <div>
                 {this.state.editMode
                     ? <div>
                         <input className={s.statusInputBlock}
-                               onBlur={this.deactivateEditMode.bind(this)}      /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст */
+                            // ref={this.statusInputRef}
+                               onChange={this.onStatusChange}
                                autoFocus={true}                                 /* автофокус на элементе */
-                               value={this.props.status}/>
+                               onBlur={this.deactivateEditMode}      /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст */
+                               value={this.state.status}/>
                     </div>
-                    : <div className={s.statusBlock}
-                           onDoubleClick={this.activateEditMode.bind(this)}     /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст  */
-                    >
-                        <span>{this.props.status}</span>
+                    : <div>
+                        <span className={s.statusBlock}
+                              onDoubleClick={this.activateEditMode}    /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст  */
+                        >
+                            {this.props.status || 'No status'}
+                        </span>
                     </div>
                 }
             </div>

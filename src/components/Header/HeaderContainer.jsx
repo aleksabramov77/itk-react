@@ -1,9 +1,8 @@
 import React from 'react'
 import Header from './Header'
 import { connect } from 'react-redux'
-import { getAuthUserData } from '../../redux/auth-reducer'
+import { getAuthUserData } from '../../redux/authReducer'
 import Preloader from '../common/Preloader/Preloader'
-import { compose } from 'redux'
 
 class HeaderContainer extends React.Component {
 

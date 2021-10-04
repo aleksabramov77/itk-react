@@ -1,36 +1,38 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { getUserProfile } from '../../../redux/profilePage-reducer'
+import { getUserProfile, getUserStatus, updateUserStatus } from '../../../redux/profilePageReducer'
 import { withRouter } from 'react-router'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
     componentDidMount () {
-        this.props.getUserProfile(this.props.match.params.userId, this.props.authId) // получаем userId из Match благодаря оборачиванию в withRouter
+        const userId = this.props.match.params.userId || this.props.authId
+        this.props.getUserProfile(userId) // получаем userId из Match благодаря оборачиванию в withRouter
+        this.props.getUserStatus(userId) // получаем userId из Match благодаря оборачиванию в withRouter
     }
 
     render () {
-        // debugger
         return (
-            <Profile userProfile={this.props.userProfile}/>
+            <Profile
+                userProfile={this.props.userProfile} status={this.props.status}
+                updateUserStatus={this.props.updateUserStatus}
+            />
         )
     }
 }
 
-
-
-
 let mapStateToProps = state => {
     return {
+        authId: state.auth.id,
         userProfile: state.profilePage.userProfile,
-        authId: state.auth.id
+        status: state.profilePage.status,
     }
 }
-export default compose (connect(mapStateToProps, {
-    getUserProfile
-}), withRouter,
-    // withAuthRedirect
-    )
+export default compose(connect(mapStateToProps, {
+        getUserProfile, getUserStatus, updateUserStatus,
+    }), withRouter,
+    withAuthRedirect
+)
 (ProfileContainer)

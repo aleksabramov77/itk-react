@@ -10,8 +10,9 @@ const Profile = (props) => {
   return (
     <div>
       <ProfileInfo className={s.profileInfoBlock}
-          userProfile={props.userProfile}
-          // smallPhoto={props.smallPhoto}
+                   userProfile={props.userProfile}
+                   status={props.status}
+                   updateUserStatus={props.updateUserStatus}
       />
 
       <MyPostsContainer className={s.profileInfoBlock}/>

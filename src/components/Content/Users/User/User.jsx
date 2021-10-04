@@ -19,16 +19,17 @@ const User = (props) => {
             <div className={s.status}>    {props.userData.status}    </div>
 
             <div className={s.followed}>
-                {props.userData.followed ?
-                    <button
+                {props.userData.followed
+                    ? <button
                         disabled={props.followingInProgress.some(id => id === props.userData.id)} // проверка id на наличие в текущий мемент запроса на сервер (если есть кнопку Дизэйблим)
                         onClick={() => props.unfollowUser(props.userData.id)}
-                        className={s.followButton}> Unfollow </button>
-                    :
-                    <button
+                        className={s.followButton}
+                    > Unfollow </button>
+                    : <button
                         disabled={props.followingInProgress.some(id => id === props.userData.id)}
                         onClick={() => props.followUser(props.userData.id)}
-                        className={s.followButton}> Follow </button>
+                        className={s.followButton}
+                    > Follow </button>
                 }
             </div>
         </div>

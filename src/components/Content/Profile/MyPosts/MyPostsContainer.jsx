@@ -1,5 +1,5 @@
 // import React from "react";
-import { addPost, updateNewPostText } from '../../../../redux/profilePage-reducer'
+import { addPost, updateNewPostText } from '../../../../redux/profilePageReducer'
 import MyPosts from './MyPosts'
 import { connect } from 'react-redux'
 

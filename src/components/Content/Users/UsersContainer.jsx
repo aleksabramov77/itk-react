@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {
     setCurrentPage,
     getUsers, unfollowUser, followUser,
-} from '../../../redux/usersPage-reducer'
+} from '../../../redux/usersPageReducer'
 import Users from './Users'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 import { compose } from 'redux'
