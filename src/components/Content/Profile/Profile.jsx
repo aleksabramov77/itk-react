@@ -6,7 +6,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
 const Profile = (props) => {
-    // debugger
+    // console.log('Profile - status: ', props.status)
   return (
     <div>
       <ProfileInfo className={s.profileInfoBlock}

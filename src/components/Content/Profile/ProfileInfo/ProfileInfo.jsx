@@ -6,6 +6,8 @@ import React from 'react'
 import Preloader from '../../../common/Preloader/Preloader'
 
 const ProfileInfo = (props) => {
+    // console.log('ProfileInfo - status: ', props.status)
+
     if(!props.userProfile.userId) {
         return <Preloader  />
     }

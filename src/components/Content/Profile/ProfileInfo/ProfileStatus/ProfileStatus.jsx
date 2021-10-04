@@ -11,7 +11,7 @@ class ProfileStatus extends React.Component {
     }
 
     activateEditMode = () => {
-        console.warn('this.state.editMode')
+        // console.warn('this.state.editMode')
         this.setState({           // метод Реакта изменяющий локальный стэйт классовой компоненты
             editMode: true
         })
@@ -28,7 +28,17 @@ class ProfileStatus extends React.Component {
         this.setState({ status: e.currentTarget.value })
     }
 
+    componentDidUpdate (prevProps, prevState, snapshot) {
+        if (prevProps.status !== this.props.status ) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+        console.log('componentDidUpdate')
+    }
+
     render () {
+        console.log(`render: this.props.state= ${this.props.status}; this.state= ${this.state.status};  ` )
         // debugger
         return (
             <div>

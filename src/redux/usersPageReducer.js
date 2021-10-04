@@ -52,11 +52,12 @@ const usersPageReducer = (state = initialState, action) => {
         case TOGGLE_FOLLOWING:
             return {
                 ...state,
-                followingInProgress: action.following ?
-                    [...state.followingInProgress, action.id] :
-                    [...state.followingInProgress.filter(id => id !== action.id)]
+                followingInProgress: action.following
+                    ? [...state.followingInProgress, action.id]
+                    : [...state.followingInProgress.filter(id => id !== action.id)]
             }
-        default: return state
+        default:
+            return state
     }
 }
 
@@ -71,32 +72,31 @@ export const toggleFollowing = (following, id) => ({ type: TOGGLE_FOLLOWING, fol
 export const getUsers = (usersOnPage, currentPage) => dispatch => {
     dispatch(toggleFetching(true))
     usersAPI.getUsers(usersOnPage, currentPage)
-        .then(data => {
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
+        .then(response => {
+            dispatch(setUsers(response.data.items))
+            dispatch(setTotalUsersCount(response.data.totalCount))
             dispatch(toggleFetching(false))
         })
 }
 export const unfollowUser = (userId) => dispatch => {
     dispatch(toggleFollowing(true, userId)) // диспатчим в стор инфу, что начался запрос на сервер и id пользователя, по которому идет запрос
     usersAPI.unfollowUser(userId) // запускаем функцию DAL уровня
-        .then(data => {  // получив ответ от сервера ...
-            if (data.resultCode === 0) {  // проверяем, что статус ОК
+        .then(response => {  // получив ответ от сервера ...
+            if (response.data.resultCode === 0) {  // проверяем, что статус ОК
                 dispatch(unfollowAC(userId)) // диспатчим в стор инфу что мы отписались
-                dispatch(toggleFollowing(false, userId) ) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
+                dispatch(toggleFollowing(false, userId)) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
             }
         })
 }
 export const followUser = (userId) => dispatch => {
     dispatch(toggleFollowing(true, userId)) // диспатчим в стор инфу, что начался запрос на сервер и id пользователя, по которому идет запрос
     usersAPI.followUser(userId) // запускаем функцию DAL уровня
-        .then(data => {  // получив ответ от сервера ...
-            if (data.resultCode === 0) {  // проверяем, что статус ОК
+        .then(response => {  // получив ответ от сервера ...
+            if (response.data.resultCode === 0) {  // проверяем, что статус ОК
                 dispatch(followAC(userId)) // диспатчим в стор инфу что мы отписались
-                dispatch(toggleFollowing(false, userId) ) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
+                dispatch(toggleFollowing(false, userId)) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
             }
         })
 }
-
 
 export default usersPageReducer

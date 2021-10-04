@@ -4,11 +4,10 @@ const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
-// const SET_CURRENT_USER = 'SET_CURRENT_USER'
-
+const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
-    status: null,
+    status: '',
     userProfile: {
         userId: null,
         lookingForAJob: null,
@@ -52,16 +51,12 @@ const profilePageReducer = (state = initialState, action) => {
                 postsData: [...state.postsData, newPost],
                 newPostText: ''
             }
-
         case UPDATE_NEW_POST_TEXT:
-            // console.log('newPostText: ' + action.newPostText)
             return {
                 ...state,
                 newPostText: action.newPostText
             }
-
         case SET_USER_PROFILE_DATA:
-            // debugger
             return {
                 ...state,
                 userProfile: {
@@ -71,22 +66,15 @@ const profilePageReducer = (state = initialState, action) => {
                 },
             }
         case TOGGLE_FETCHING:
-            // debugger
             return {
                 ...state,
                 isFetching: action.isFetching,
             }
-
-
-        // case SET_CURRENT_USER:
-        //     debugger
-        //     return {
-        //         ...state,
-        //         userProfile: {
-        //             userId: action.userId,
-        //         },
-        //     }
-
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.statusText,
+            }
         default:
             return state
     }
@@ -96,16 +84,33 @@ export const addPost = () => ({ type: ADD_POST })
 export const updateNewPostText = newPostText => ({ type: UPDATE_NEW_POST_TEXT, newPostText })
 export const setUserProfileData = userProfile => ({ type: SET_USER_PROFILE_DATA, userProfile })
 export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
+export const setUserStatus = statusText => ({ type: SET_STATUS, statusText })
 
-export const getUserProfile = (userId, authId) => dispatch => {
-    toggleFetching(true)
-    profileAPI.getProfile(userId, authId)
-        .then(data => {
-            dispatch(setUserProfileData(data))
-            dispatch(toggleFetching(false))
+export const getUserProfile = (userId) => dispatch => {
+    // toggleFetching(true)
+    profileAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfileData(response.data))
+            // dispatch(toggleFetching(false))
         })
 }
-
-
+export const getUserStatus = (userId) => dispatch => {
+    // toggleFetching(true)
+    profileAPI.getUserStatus(userId)
+        .then(response => {
+            dispatch(setUserStatus(response.data))
+            // dispatch(toggleFetching(false))
+        })
+}
+export const updateUserStatus = (statusText) => dispatch => {
+    // toggleFetching(true)
+    profileAPI.updateUserStatus(statusText)
+        .then(response => {
+            if(response.data.resultCode === 0) {
+                dispatch(setUserStatus(statusText))
+            }
+            // dispatch(toggleFetching(false))
+        })
+}
 
 export default profilePageReducer
