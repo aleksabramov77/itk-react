@@ -13,17 +13,7 @@ class ProfileContainer extends React.Component {
         this.props.getUserStatus(userId) // получаем userId из Match благодаря оборачиванию в withRouter
     }
 
-    // componentDidUpdate (prevProps, prevState, snapshot) {
-    //     if (prevProps.authId !== this.props.authId) {
-    //         this.props.setUserProfileData(this.props.authId)
-    //     }
-    //     console.log('componentDidUpdate')
-    // }
-
     render () {
-        // console.log('ProfileContainer - authId: ', this.props.authId)
-        // console.log('ProfileContainer - status: ', this.props.status)
-        // console.log('ProfileContainer - userPr: ', this.props.userProfile.userId)
         return (
             <Profile
                 userProfile={this.props.userProfile} status={this.props.status}

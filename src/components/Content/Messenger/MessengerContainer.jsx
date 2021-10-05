@@ -1,4 +1,4 @@
-import { addMessage, updateNewMessageText } from '../../../redux/messengerPageReducer'
+import { addMessage } from '../../../redux/messengerPageReducer'
 import Messenger from './Messenger'
 import { connect } from 'react-redux'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
@@ -14,6 +14,6 @@ let mapStateToProps = state => ({
 })
 
 export default compose (connect(mapStateToProps, {
-    addMessage, updateNewMessageText,
+    addMessage,
 }),withAuthRedirect)
 (Messenger)
