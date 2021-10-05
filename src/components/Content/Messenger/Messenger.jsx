@@ -4,15 +4,27 @@ import Message from './Message/Message'
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Redirect } from 'react-router-dom'
+import { maxLength, minLength, required } from '../../../utils/validators/validators'
+import { Textarea } from '../../common/FormsControls/FormsControls'
+
+
+const maxLength15 = maxLength(15)
+const minLength2 = minLength(2)
+
 
 const AddMessageForm = props => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component='textarea' name='newMessageText' placeholder='Enter your message'/>
+                <Field
+                    component={Textarea}
+                    name='newMessageText'
+                    placeholder='Enter your message'
+                    validate={[required, maxLength15, minLength2]}
+                />
             </div>
-            <div>
-                <button className={s.buttonBlock}> Send message</button>
+            <div className={s.buttonBlock}>
+                <button > Send message</button>
             </div>
         </form>)
 }
