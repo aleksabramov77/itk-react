@@ -34,11 +34,11 @@ class ProfileStatus extends React.Component {
                 status: this.props.status
             })
         }
-        console.log('componentDidUpdate')
+        // console.log('componentDidUpdate')
     }
 
     render () {
-        console.log(`render: this.props.state= ${this.props.status}; this.state= ${this.state.status};  ` )
+        // console.log(`render: this.props.state= ${this.props.status}; this.state= ${this.state.status};  ` )
         // debugger
         return (
             <div>

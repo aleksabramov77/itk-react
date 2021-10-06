@@ -1,46 +1,70 @@
-import { Field, reduxForm } from 'redux-form'
-import { maxLength, minLength, required } from '../../../utils/validators/validators'
+import { Form, Field } from 'react-final-form'
+import { composeValidators, maxLength, minLength, required } from '../../../utils/validators/validators'
 import { Input } from '../../common/FormsControls/FormsControls'
 import React from 'react'
 import s from '../Messenger/Messenger.module.css'
 
-const maxLength15 = maxLength(25)
-const minLength5 = minLength(5)
 
-const LoginForm = props => {
 
-// debugger
-    return (
+const LoginForm = props =>
+        <Form
+            onSubmit={props.onSubmit}
+            // initialValues={}
+            render={({ handleSubmit, form, submitting, pristine, values }) =>
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        name='login'
+                        component={Input}
+                        placeholder='Login'
+                        validate={composeValidators(
+                            required,
+                            maxLength(25),
+                            minLength(5)
+                        )}
+                    />
+                    <Field
+                        name='password'
+                        placeholder='Password'
+                        component={Input}
+                        validate={composeValidators(
+                            required,
+                            maxLength(25),
+                            minLength(5))}
+                    />
+                    <div>
+                        <Field
+                            name='rememberMe'
+                            component={Input}
+                            type='checkbox'
+                        />
+                        remember me
+                    </div>
+                    <div className={s.buttonBlock}>
+                        <button
+                            type="submit"
+                            disabled={submitting}
+                        >
+                            Login
+                        </button>
+                        <button
+                            type="button"
+                            onClick={form.reset}
+                            disabled={submitting || pristine}
+                        >
+                            Reset
+                        </button>
+                    </div>
+                </form>
+            }
+        />
 
-        <form onSubmit={props.handleSubmit}>
-            <Field
-                component={Input}
-                name='login'
-                placeholder='Login'
-                validate={[
-                    required,
-                    maxLength15,
-                    minLength5
-                ]}
-            />
-            <Field component={Input} name='password' placeholder='Password'
-                        validate={[required, maxLength15, minLength5 ]}
-            />
-            <div><Field component={Input} name='rememberMe' type='checkbox'/> remember me</div>
-            <div className={s.buttonBlock}>
-                <button>Login</button>
-            </div>
-        </form>
-    )
-}
-const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
 
 const Login = props => {
-// const onSubmit = formData => console.log(formData)
+    const onSubmit = formData => console.log(formData)
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={formData => console.log(formData)}/>
+            <LoginForm onSubmit={onSubmit}/>
         </div>
     )
 }

@@ -2,33 +2,41 @@ import s from './Messenger.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Form, Field } from 'react-final-form'
+
 import { Redirect } from 'react-router-dom'
-import { maxLength, minLength, required } from '../../../utils/validators/validators'
+import { composeValidators, maxLength, minLength, required } from '../../../utils/validators/validators'
 import { Textarea } from '../../common/FormsControls/FormsControls'
 
+const AddMessageForm = props =>
+    <Form
+        onSubmit={props.onSubmit}
+        // initialValues={}
+        render={({ handleSubmit, form, submitting, pristine, values }) =>
+            <form onSubmit={handleSubmit}>
 
-const maxLength15 = maxLength(15)
-const minLength2 = minLength(2)
-
-
-const AddMessageForm = props => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
                 <Field
                     component={Textarea}
                     name='newMessageText'
                     placeholder='Enter your message'
-                    validate={[required, maxLength15, minLength2]}
+                    validate={composeValidators(
+                        required,
+                        maxLength(25),
+                        minLength(5)
+                    )}
                 />
-            </div>
-            <div className={s.buttonBlock}>
-                <button > Send message</button>
-            </div>
-        </form>)
-}
-const AddMessageReduxForm = reduxForm({ form: 'messengerAddMessage' })(AddMessageForm)
+                <div className={s.buttonBlock}>
+                    <button
+                        type="submit"
+                        disabled={submitting}
+                    >
+                        Send message
+                    </button>
+
+                </div>
+            </form>
+        }
+    />
 
 const Messenger = props => {
 
@@ -43,7 +51,7 @@ const Messenger = props => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>{dialogsElements}</div>
             <div className={s.messagesItems}>{messagesElements}</div>
-            <div className={s.newMessage}><AddMessageReduxForm onSubmit={addNewMessage}/></div>
+            <div className={s.newMessage}><AddMessageForm onSubmit={addNewMessage}/></div>
         </div>
     )
 }
