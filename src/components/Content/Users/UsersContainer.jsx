@@ -37,8 +37,13 @@ let mapStateToProps = state => ({
     followingInProgress: state.usersPage.followingInProgress,
 })
 
-export default compose (connect(mapStateToProps, {
+// export default compose (connect(mapStateToProps, {
+//     setCurrentPage, getUsers,
+//     unfollowUser, followUser,
+// }),withAuthRedirect)
+// (UsersContainer)
+
+export default connect(mapStateToProps, {
     setCurrentPage, getUsers,
     unfollowUser, followUser,
-}),withAuthRedirect)
-(UsersContainer)
+})(UsersContainer)

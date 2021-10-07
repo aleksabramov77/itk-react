@@ -3,19 +3,21 @@ import { composeValidators, maxLength, minLength, required } from '../../../util
 import { Input } from '../../common/FormsControls/FormsControls'
 import React from 'react'
 import s from '../Messenger/Messenger.module.css'
+import { Redirect } from 'react-router-dom'
+
 
 
 
 const LoginForm = props =>
         <Form
             onSubmit={props.onSubmit}
-            // initialValues={}
+            // initialValues={{}}
             render={({ handleSubmit, form, submitting, pristine, values }) =>
                 <form onSubmit={handleSubmit}>
                     <Field
-                        name='login'
+                        name='email'
                         component={Input}
-                        placeholder='Login'
+                        placeholder='Email'
                         validate={composeValidators(
                             required,
                             maxLength(25),
@@ -26,6 +28,7 @@ const LoginForm = props =>
                         name='password'
                         placeholder='Password'
                         component={Input}
+                        type='password'
                         validate={composeValidators(
                             required,
                             maxLength(25),
@@ -60,11 +63,16 @@ const LoginForm = props =>
 
 
 const Login = props => {
-    const onSubmit = formData => console.log(formData)
+    const logIn = ({ email, password, rememberMe })  => props.logIn(email, password, rememberMe)
+    // const login = ({ login, password, rememberMe }) => console.log(login, password, rememberMe)
+
+    if(props.isAuth) return <Redirect to='/profile'/>
+
+
     return (
         <div>
             <h1>Login</h1>
-            <LoginForm onSubmit={onSubmit}/>
+            <LoginForm onSubmit={logIn}/>
         </div>
     )
 }

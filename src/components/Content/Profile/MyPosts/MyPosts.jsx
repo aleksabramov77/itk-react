@@ -9,7 +9,7 @@ import { Textarea } from '../../../common/FormsControls/FormsControls'
 const AddPostForm = props =>
     <Form
         onSubmit={props.onSubmit}
-        // initialValues={}
+        // initialValues={{}}
         render={({ handleSubmit, form, submitting, pristine, values }) =>
             <form onSubmit={handleSubmit}>
                 <Field

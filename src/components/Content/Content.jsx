@@ -8,6 +8,7 @@ import Settings from './Settings/Settings'
 import MessengerContainer from './Messenger/MessengerContainer'
 import UsersContainer from './Users/UsersContainer'
 import Login from './Login/Login'
+import LoginContainer from './Login/LoginContainer'
 
 const Content = () => {
     return (
@@ -22,7 +23,7 @@ const Content = () => {
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>
-                <Route path='/login' render={() => <Login/>}/>
+                <Route path='/login' render={() => <LoginContainer/>}/>
             </div>
         </div>
     )

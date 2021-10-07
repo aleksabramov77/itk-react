@@ -8,15 +8,16 @@ import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
     componentDidMount () {
-        const userId = this.props.match.params.userId || this.props.authId
-        this.props.getUserProfile(userId) // получаем userId из Match благодаря оборачиванию в withRouter
-        this.props.getUserStatus(userId) // получаем userId из Match благодаря оборачиванию в withRouter
+        const userId = this.props.match.params.userId || this.props.authId // получаем userId из Match благодаря оборачиванию в withRouter
+        this.props.getUserProfile(userId)
+        this.props.getUserStatus(userId)
     }
 
     render () {
         return (
             <Profile
-                userProfile={this.props.userProfile} status={this.props.status}
+                userProfile={this.props.userProfile}
+                status={this.props.status}
                 updateUserStatus={this.props.updateUserStatus}
             />
         )

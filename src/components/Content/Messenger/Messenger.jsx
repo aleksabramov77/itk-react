@@ -11,7 +11,7 @@ import { Textarea } from '../../common/FormsControls/FormsControls'
 const AddMessageForm = props =>
     <Form
         onSubmit={props.onSubmit}
-        // initialValues={}
+        // initialValues={{}}
         render={({ handleSubmit, form, submitting, pristine, values }) =>
             <form onSubmit={handleSubmit}>
 
@@ -51,7 +51,11 @@ const Messenger = props => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>{dialogsElements}</div>
             <div className={s.messagesItems}>{messagesElements}</div>
-            <div className={s.newMessage}><AddMessageForm onSubmit={addNewMessage}/></div>
+            <div className={s.newMessage}>
+                <AddMessageForm
+                    onSubmit={addNewMessage}
+                />
+            </div>
         </div>
     )
 }

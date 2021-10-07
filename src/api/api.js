@@ -9,49 +9,34 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers (usersOnPage = 10, currentPage = 1) {
-        return instance.get(`users?count=${usersOnPage}&page=${currentPage}`)
-    },
-    unfollowUser (userId) {
-        return instance.delete(`follow/${userId}`)
-    },
-    followUser (userId) {
-        return instance.post(`follow/${userId}`, {})
-    },
+    getUsers: (usersOnPage = 10, currentPage = 1) =>
+        instance.get(`users?count=${usersOnPage}&page=${currentPage}`),
+    unfollowUser: userId =>
+        instance.delete(`follow/${userId}`),
+    followUser: userId =>
+        instance.post(`follow/${userId}`, {}),
     getProfile (userId, authId) {
         console.warn('Obsolete method" Please profileAPI object')
         return profileAPI.getProfile(userId, authId) // Для сохранения backward compatibility ставляем возможность использовать запросы сюда
     }
-
 }
 
 export const profileAPI = {
-    getProfile (userId) {
-        return instance.get(`profile/${userId}`)
-    },
-    getUserStatus (userId) {
-        return instance.get(`profile/status/${userId}`)
-    },
-    updateUserStatus (status) {
-        return instance.put(`profile/status`, {status: status})
-    }
+    getProfile: userId =>
+        instance.get(`profile/${userId}`),
+    getUserStatus: userId =>
+        instance.get(`profile/status/${userId}`),
+    updateUserStatus: status =>
+        instance.put(`profile/status`, { status: status })
 }
 
 export const authAPI = {
-    me () {
-        return instance.get(`auth/me`)
-    },
-    logIn (email, password, rememberMe=false, captcha=true) {
-        return instance.post(`auth/login`, {
-            email: email,
-            password: password,
-            rememberMe: rememberMe,
-            captcha: captcha
-        })
-    },
-    logOut () {
-        return instance.delete(`auth/login`)
-    },
+    me: () =>
+        instance.get(`auth/me`),
+    logIn: (email, password, rememberMe = false) =>
+        instance.post(`auth/login`, { email, password, rememberMe }),
+    logOut: () =>
+        instance.delete(`auth/login`),
 }
 
 

@@ -15,7 +15,9 @@ const Profile = (props) => {
                    updateUserStatus={props.updateUserStatus}
       />
 
-      <MyPostsContainer className={s.profileInfoBlock}/>
+      <MyPostsContainer
+          className={s.profileInfoBlock}
+      />
     </div>
   );
 };
