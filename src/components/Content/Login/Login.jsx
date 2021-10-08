@@ -5,17 +5,33 @@ import React from 'react'
 import s from '../Messenger/Messenger.module.css'
 import { Redirect } from 'react-router-dom'
 
-
-
-
 const LoginForm = props =>
-        <Form
-            onSubmit={props.onSubmit}
-            // initialValues={{}}
-            render={({ handleSubmit, form, submitting, pristine, values }) =>
-                <form onSubmit={handleSubmit}>
+    <Form
+        // className={s.correct}
+        onSubmit={props.onSubmit}
+        // initialValues={{}}
+        render={({
+            submitError,
+            handleSubmit,
+            reset,
+            form,
+            submitting,
+            pristine,
+            values,
+        }) => {
+
+            // debugger
+            return (
+                <form
+                    onSubmit={event => {handleSubmit(event).then(reset)}}
+                >
+                    <div>
+                        {submitError}
+                    </div>
                     <Field
                         name='email'
+                        className={submitError ? s.submitError : s.correct }
+
                         component={Input}
                         placeholder='Email'
                         validate={composeValidators(
@@ -26,6 +42,8 @@ const LoginForm = props =>
                     />
                     <Field
                         name='password'
+                        className={submitError ? s.submitError : s.correct }
+
                         placeholder='Password'
                         component={Input}
                         type='password'
@@ -45,8 +63,7 @@ const LoginForm = props =>
                     <div className={s.buttonBlock}>
                         <button
                             type="submit"
-                            disabled={submitting}
-                        >
+                            disabled={submitting || pristine}                        >
                             Login
                         </button>
                         <button
@@ -58,16 +75,15 @@ const LoginForm = props =>
                         </button>
                     </div>
                 </form>
-            }
-        />
-
+            )
+        }
+        }
+    />
 
 const Login = props => {
-    const logIn = ({ email, password, rememberMe })  => props.logIn(email, password, rememberMe)
-    // const login = ({ login, password, rememberMe }) => console.log(login, password, rememberMe)
+    const logIn = ({ email, password, rememberMe }) => props.logIn(email, password, rememberMe)
 
-    if(props.isAuth) return <Redirect to='/profile'/>
-
+    if (props.isAuth) return <Redirect to='/profile'/>
 
     return (
         <div>

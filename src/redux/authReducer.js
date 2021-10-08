@@ -1,4 +1,5 @@
 import { authAPI } from '../api/api'
+import { FORM_ERROR } from 'final-form'
 
 const SET_USER = 'SET_USER'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
@@ -48,16 +49,12 @@ export const getAuthUserData = () => dispatch => {
         })
 }
 
-export const logIn = (email, password, rememberMe) => dispatch => {
+export const logIn = (email, password, rememberMe) => async dispatch => {
     dispatch(toggleFetching(true))
-
-    authAPI.logIn(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserData())
-            }
-            dispatch(toggleFetching(false))
-        })
+    const response = await authAPI.logIn(email, password, rememberMe)
+    dispatch(toggleFetching(false))
+    if (response.data.resultCode === 0) dispatch(getAuthUserData())
+    else return { [FORM_ERROR]: response.data.messages[0] }
 }
 
 export const logOut = () => dispatch => {
