@@ -27,4 +27,8 @@
 
 .buttonBlock {
   margin-bottom: 10px;
-} 
+}
+
+.submitError {
+  border: 2px red solid;
+}
