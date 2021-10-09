@@ -31,6 +31,7 @@ const Users = props => {
                 key={u.id} userData={u}
                 followUser={props.followUser} unfollowUser={props.unfollowUser}
                 followingInProgress={props.followingInProgress}
+                isAuth={props.isAuth}
             />)}
         </div>)
 }

@@ -30,6 +30,7 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = state => ({
     users: state.usersPage.users,
+    isAuth:state.auth.isAuth,
     totalUsersCount: state.usersPage.totalUsersCount,
     usersOnPage: state.usersPage.usersOnPage,
     currentPage: state.usersPage.currentPage,

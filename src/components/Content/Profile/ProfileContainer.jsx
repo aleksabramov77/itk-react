@@ -11,6 +11,7 @@ import { NavLink, Redirect } from 'react-router-dom'
 class ProfileContainer extends React.Component {
     componentDidMount () {
         const userId = this.props.match.params.userId || this.props.authId // получаем userId из Match благодаря оборачиванию в withRouter
+        if (!userId) this.props.history.push('/login')
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
         // debugger
@@ -19,7 +20,7 @@ class ProfileContainer extends React.Component {
     render () {
         // debugger
 
-        if(!(this.props.match.params.userId || this.props.userProfile.userId)) return <Redirect to='/login'/>
+        // if(!(this.props.match.params.userId || this.props.userProfile.userId)) return <Redirect to='/login'/>
 
         return (
 
