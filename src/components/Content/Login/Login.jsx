@@ -19,18 +19,18 @@ const LoginForm = props =>
             pristine,
             values,
         }) => {
-
+            // form.reset()
             // debugger
             return (
                 <form
-                    onSubmit={event => {handleSubmit(event).then(reset)}}
+                    onSubmit={handleSubmit}
                 >
                     <div>
                         {submitError}
                     </div>
                     <Field
                         name='email'
-                        className={submitError ? s.submitError : s.correct }
+                        className={submitError ? s.submitError : s.correct}
 
                         component={Input}
                         placeholder='Email'
@@ -42,7 +42,7 @@ const LoginForm = props =>
                     />
                     <Field
                         name='password'
-                        className={submitError ? s.submitError : s.correct }
+                        className={submitError ? s.submitError : s.correct}
 
                         placeholder='Password'
                         component={Input}
@@ -63,7 +63,7 @@ const LoginForm = props =>
                     <div className={s.buttonBlock}>
                         <button
                             type="submit"
-                            disabled={submitting || pristine}                        >
+                            disabled={submitting || pristine}>
                             Login
                         </button>
                         <button

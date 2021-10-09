@@ -10,7 +10,9 @@ const AddPostForm = props =>
     <Form
         onSubmit={props.onSubmit}
         // initialValues={{}}
-        render={({ handleSubmit, form, submitting, pristine, values }) =>
+        render={({ handleSubmit, form, submitting, pristine, values }) => {
+            // debugger
+            return (
             <form onSubmit={handleSubmit}>
                 <Field
                     name='newPostText'
@@ -28,7 +30,8 @@ const AddPostForm = props =>
                 >
                     Add post
                 </button>
-            </form>
+            </form>)
+        }
         }
     />
 

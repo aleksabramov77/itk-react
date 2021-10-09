@@ -1,8 +1,9 @@
 import { profileAPI } from '../api/api'
+import { toggleFetching } from './appReducer'
 
 const ADD_POST = 'ADD_POST'
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+// const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
@@ -31,8 +32,7 @@ let initialState = {
         { id: 1, message: 'Hi, how are you', likesCount: 5 },
         { id: 2, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', likesCount: 10 },
     ],
-
-    isFetching: true,
+    // isFetching: true,
 }
 
 const profilePageReducer = (state = initialState, action) => {
@@ -59,11 +59,11 @@ const profilePageReducer = (state = initialState, action) => {
                     photos: { ...action.userProfile.photos },
                 },
             }
-        case TOGGLE_FETCHING:
-            return {
-                ...state,
-                isFetching: action.isFetching,
-            }
+        // case TOGGLE_FETCHING:
+        //     return {
+        //         ...state,
+        //         isFetching: action.isFetching,
+        //     }
         case SET_STATUS:
             return {
                 ...state,
@@ -76,7 +76,7 @@ const profilePageReducer = (state = initialState, action) => {
 
 export const addPost = newPostText => ({ type: ADD_POST , newPostText})
 export const setUserProfileData = userProfile => ({ type: SET_USER_PROFILE_DATA, userProfile })
-export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
+// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 export const setUserStatus = statusText => ({ type: SET_STATUS, statusText })
 
 export const getUserProfile = userId => dispatch => {

@@ -5,8 +5,8 @@ import {
     getUsers, unfollowUser, followUser,
 } from '../../../redux/usersPageReducer'
 import Users from './Users'
-import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
-import { compose } from 'redux'
+// import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
+// import { compose } from 'redux'
 
 class UsersContainer extends React.Component {
     componentDidMount () {
@@ -28,7 +28,6 @@ class UsersContainer extends React.Component {
     }
 }
 
-
 let mapStateToProps = state => ({
     users: state.usersPage.users,
     totalUsersCount: state.usersPage.totalUsersCount,
@@ -37,11 +36,16 @@ let mapStateToProps = state => ({
     followingInProgress: state.usersPage.followingInProgress,
 })
 
-// export default compose (connect(mapStateToProps, {
-//     setCurrentPage, getUsers,
-//     unfollowUser, followUser,
-// }),withAuthRedirect)
-// (UsersContainer)
+// export default compose(
+//     connect(
+//         mapStateToProps,
+//         {
+//             setCurrentPage, getUsers,
+//             unfollowUser, followUser,
+//         }
+//     ),
+//     withAuthRedirect
+// )(UsersContainer)
 
 export default connect(mapStateToProps, {
     setCurrentPage, getUsers,

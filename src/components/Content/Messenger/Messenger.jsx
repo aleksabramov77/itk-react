@@ -40,7 +40,7 @@ const AddMessageForm = props =>
 
 const Messenger = props => {
 
-    if (!props.isAuth) return <Redirect to='/login'/>
+    // if (!props.isAuth) return <Redirect to='/login'/>
 
     let dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
     let messagesElements = props.messages.map(m => <Message key={m.id} message={m.message}/>)

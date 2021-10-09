@@ -10,6 +10,7 @@ const Profile = (props) => {
   return (
     <div>
       <ProfileInfo className={s.profileInfoBlock}
+                   authId={props.authId}
                    userProfile={props.userProfile}
                    status={props.status}
                    updateUserStatus={props.updateUserStatus}

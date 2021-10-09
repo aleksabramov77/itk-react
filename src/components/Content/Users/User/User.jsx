@@ -18,6 +18,7 @@ const User = (props) => {
             <div className={s.city}>    {'props.userData.location.city'}    </div>
             <div className={s.status}>    {props.userData.status}    </div>
 
+            // (un)following
             <div className={s.followed}>
                 {props.userData.followed
                     ? <button

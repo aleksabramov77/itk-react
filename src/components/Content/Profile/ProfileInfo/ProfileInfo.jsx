@@ -36,7 +36,11 @@ const ProfileInfo = (props) => {
                 <div className={s.contactsMainLinkBlock}>{props.userProfile.contacts.mainLink}</div>
             </div>
             <div className={s.profileStatusBlock}>
-                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}
+                <ProfileStatus
+                    authId={props.authId}
+                    userId={props.userProfile.userId}
+                    status={props.status}
+                    updateUserStatus={props.updateUserStatus}
                 />
             </div>
 

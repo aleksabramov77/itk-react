@@ -1,8 +1,9 @@
 import { authAPI } from '../api/api'
 import { FORM_ERROR } from 'final-form'
+import { toggleFetching } from './appReducer'
 
 const SET_USER = 'SET_USER'
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+// const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
 let initialState = {
     id: null,
@@ -23,11 +24,11 @@ const authReducer = (state = initialState, action) => {
                 ...action.payload,
                 // isAuth: true,
             }
-        case TOGGLE_FETCHING:
-            return {
-                ...state,
-                isFetching: action.isFetching,
-            }
+        // case TOGGLE_FETCHING:
+        //     return {
+        //         ...state,
+        //         isFetching: action.isFetching,
+        //     }
         default:
             return state
 
@@ -35,11 +36,11 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER, payload: { id, email, login, isAuth } })
-export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
+// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
 export const getAuthUserData = () => dispatch => {
     dispatch(toggleFetching(true))
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data
