@@ -11,8 +11,7 @@ import {
     getTotalUsersCount, getUsers,
     getUsersOnPage,
 } from '../../../redux/usersSelectors'
-// import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
-// import { compose } from 'redux'
+
 
 class UsersContainer extends React.Component {
     componentDidMount () {
@@ -25,7 +24,7 @@ class UsersContainer extends React.Component {
     }
 
     render () {
-        console.log('RENDER')
+        // console.log('RENDER')
         return (
             <Users
                 {...this.props}
@@ -44,7 +43,7 @@ class UsersContainer extends React.Component {
 //     followingInProgress: state.usersPage.followingInProgress,
 // })
 let mapStateToProps = state => {
-    console.log('MSTP')
+    // console.log('MSTP')
 
     return     ({
         users: getUsers(state),
