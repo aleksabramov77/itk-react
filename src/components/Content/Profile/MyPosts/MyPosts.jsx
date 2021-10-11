@@ -36,7 +36,7 @@ const AddPostForm = props =>
     />
 
 
-const MyPosts = props => {
+const MyPosts = React.memo(props => {
 
     const postsElements = props.posts.slice(0).reverse().map(p =>
         <Post key={p.id} message={p.message} likesCount={p.likesCount}/>
@@ -53,6 +53,6 @@ const MyPosts = props => {
             <div className={s.posts}>{postsElements}</div>
         </div>
     )
-}
+})
 
 export default MyPosts
