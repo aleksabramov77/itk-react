@@ -15,7 +15,6 @@ const Profile = props => {
                    status={props.status}
                    updateUserStatus={props.updateUserStatus}
       />
-
       <MyPostsContainer
           className={s.profileInfoBlock}
       />
