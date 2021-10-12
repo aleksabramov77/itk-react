@@ -2,6 +2,7 @@ import { profileAPI } from '../api/api'
 import { toggleFetching } from './appReducer'
 
 const ADD_POST = 'ADD_POST'
+const DELETE_POST = 'DELETE_POST'
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
 // const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 const SET_STATUS = 'SET_STATUS'
@@ -49,6 +50,11 @@ const profilePageReducer = (state = initialState, action) => {
                 ...state,
                 postsData: [...state.postsData, newPost],
             }
+        case DELETE_POST:
+            return {
+                ...state,
+                postsData: [...state.postsData.filter( p => p.id != action.id) ],
+            }
 
         case SET_USER_PROFILE_DATA:
             return {
@@ -74,10 +80,11 @@ const profilePageReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = newPostText => ({ type: ADD_POST , newPostText})
+export const addPost = newPostText => ({ type: ADD_POST, newPostText })
+export const deletePost = id => ({ type: DELETE_POST, id })
 export const setUserProfileData = userProfile => ({ type: SET_USER_PROFILE_DATA, userProfile })
-// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 export const setUserStatus = statusText => ({ type: SET_STATUS, statusText })
+// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
 export const getUserProfile = userId => dispatch => {
     toggleFetching(true)
@@ -99,7 +106,7 @@ export const updateUserStatus = statusText => dispatch => {
     // toggleFetching(true)
     profileAPI.updateUserStatus(statusText)
         .then(response => {
-            if(response.data.resultCode === 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(setUserStatus(statusText))
             }
             // dispatch(toggleFetching(false))
