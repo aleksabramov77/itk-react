@@ -1,0 +1,11 @@
+.pageSelector {
+
+}
+
+.currentPage {
+    font-weight:800;
+}
+
+.pageNumberButton {
+    width: 50px;
+}

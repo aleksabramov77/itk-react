@@ -1,4 +1,4 @@
-let ADD_MESSAGE = 'ADD_MESSAGE';
+let ADD_MESSAGE = 'messengerPage/ADD_MESSAGE';
 
 let initialState = {
   dialogsData: [

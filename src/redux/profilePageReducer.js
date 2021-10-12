@@ -1,11 +1,10 @@
 import { profileAPI } from '../api/api'
 import { toggleFetching } from './appReducer'
 
-const ADD_POST = 'ADD_POST'
-const DELETE_POST = 'DELETE_POST'
-const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
-// const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
-const SET_STATUS = 'SET_STATUS'
+const ADD_POST = 'profilePage/ADD_POST'
+const DELETE_POST = 'profilePage/DELETE_POST'
+const SET_USER_PROFILE_DATA = 'profilePage/SET_USER_PROFILE_DATA'
+const SET_STATUS = 'profilePage/SET_STATUS'
 
 let initialState = {
     status: '',
@@ -53,7 +52,7 @@ const profilePageReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                postsData: [...state.postsData.filter( p => p.id != action.id) ],
+                postsData: [...state.postsData.filter(p => p.id != action.id)],
             }
 
         case SET_USER_PROFILE_DATA:
@@ -65,11 +64,7 @@ const profilePageReducer = (state = initialState, action) => {
                     photos: { ...action.userProfile.photos },
                 },
             }
-        // case TOGGLE_FETCHING:
-        //     return {
-        //         ...state,
-        //         isFetching: action.isFetching,
-        //     }
+
         case SET_STATUS:
             return {
                 ...state,
@@ -84,33 +79,24 @@ export const addPost = newPostText => ({ type: ADD_POST, newPostText })
 export const deletePost = id => ({ type: DELETE_POST, id })
 export const setUserProfileData = userProfile => ({ type: SET_USER_PROFILE_DATA, userProfile })
 export const setUserStatus = statusText => ({ type: SET_STATUS, statusText })
-// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
-export const getUserProfile = userId => dispatch => {
+export const getUserProfile = userId => async dispatch => {
     toggleFetching(true)
-    profileAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfileData(response.data))
-            dispatch(toggleFetching(false))
-        })
+    const response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfileData(response.data))
+    dispatch(toggleFetching(false))
 }
-export const getUserStatus = userId => dispatch => {
-    // toggleFetching(true)
-    profileAPI.getUserStatus(userId)
-        .then(response => {
-            dispatch(setUserStatus(response.data))
-            // dispatch(toggleFetching(false))
-        })
+
+export const getUserStatus = userId => async dispatch => {
+    const response = await profileAPI.getUserStatus(userId)
+    dispatch(setUserStatus(response.data))
 }
-export const updateUserStatus = statusText => dispatch => {
-    // toggleFetching(true)
-    profileAPI.updateUserStatus(statusText)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserStatus(statusText))
-            }
-            // dispatch(toggleFetching(false))
-        })
+
+export const updateUserStatus = statusText => async dispatch => {
+    const response = profileAPI.updateUserStatus(statusText)
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(statusText))
+    }
 }
 
 export default profilePageReducer

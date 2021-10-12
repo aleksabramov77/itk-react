@@ -1,7 +1,7 @@
 import { getAuthUserData } from './authReducer'
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+const INITIALIZED_SUCCESS = 'app/INITIALIZED_SUCCESS'
+const TOGGLE_FETCHING = 'app/TOGGLE_FETCHING'
 
 
 let initialState = {
@@ -18,7 +18,6 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 initialized: true,
             }
-
         default:
             return state
     }
@@ -28,12 +27,15 @@ export const initializeSuccess = () => ({ type: INITIALIZED_SUCCESS} )
 export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
 
-export const initializeApp = () => dispatch => {
-    // debugger
-    let promise = dispatch(getAuthUserData())
+export const initializeApp = () => async dispatch => {
+    const promise = await dispatch(getAuthUserData())
     Promise.all([promise]).then(() => dispatch(initializeSuccess()))
-    // debugger
 }
+
+// export const autoToggleFetching = (wrappedFunction, ...args) => {
+//     toggleFetching(true)
+//     toggleFetching(false)
+// }
 
 
 export default appReducer

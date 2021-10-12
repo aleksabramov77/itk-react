@@ -2,8 +2,7 @@ import { authAPI } from '../api/api'
 import { FORM_ERROR } from 'final-form'
 import { toggleFetching } from './appReducer'
 
-const SET_USER = 'SET_USER'
-// const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+const SET_USER = 'auth/SET_USER'
 
 let initialState = {
     id: null,
@@ -14,7 +13,6 @@ let initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-    // debugger
 
     switch (action.type) {
 
@@ -24,11 +22,7 @@ const authReducer = (state = initialState, action) => {
                 ...action.payload,
                 // isAuth: true,
             }
-        // case TOGGLE_FETCHING:
-        //     return {
-        //         ...state,
-        //         isFetching: action.isFetching,
-        //     }
+
         default:
             return state
 
@@ -36,18 +30,15 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER, payload: { id, email, login, isAuth } })
-// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 
-export const getAuthUserData = () => dispatch => {
+export const getAuthUserData = () => async dispatch => {
     dispatch(toggleFetching(true))
-    return authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let { id, email, login } = response.data.data
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-            dispatch(toggleFetching(false))
-        })
+    const response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let { id, email, login } = response.data.data
+        dispatch(setAuthUserData(id, email, login, true))
+    }
+    dispatch(toggleFetching(false))
 }
 
 export const logIn = (email, password, rememberMe) => async dispatch => {
@@ -58,16 +49,13 @@ export const logIn = (email, password, rememberMe) => async dispatch => {
     else return { [FORM_ERROR]: response.data.messages[0] }
 }
 
-export const logOut = () => dispatch => {
+export const logOut = () => async dispatch => {
     dispatch(toggleFetching(true))
-
-    authAPI.logOut()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-            dispatch(toggleFetching(false))
-        })
+    const response = await authAPI.logOut()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
+    dispatch(toggleFetching(false))
 }
 
 export default authReducer

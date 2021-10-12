@@ -5,10 +5,10 @@ import React from 'react'
 import s from '../Messenger/Messenger.module.css'
 import { Redirect } from 'react-router-dom'
 
-const LoginForm = props =>
+const LoginForm = ({ onSubmit }) =>
     <Form
         // className={s.correct}
-        onSubmit={props.onSubmit}
+        onSubmit={onSubmit}
         // initialValues={{}}
         render={({
             submitError,

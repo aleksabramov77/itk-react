@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 const getUsersRegular = state => state.usersPage.users
-export const getUsers2 = state => getUsersRegular(state).filter(u => true)
+// export const getUsers2 = state => getUsersRegular(state).filter(u => true)
 export const getUsers = createSelector(getUsersRegular, users => users.filter(u => true))
 
 

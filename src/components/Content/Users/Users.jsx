@@ -1,37 +1,21 @@
 import User from './User/User'
-import s from './Users.module.css'
+// import s from './Users.module.css'
 import React from 'react'
+import Paginator from '../../common/Paginator/Paginator'
 
-const Users = props => {
-
-    //pagination numbers creating
-    let pagesQuantity = Math.ceil(props.totalUsersCount / props.usersOnPage)
-    let pageNumbersArray = [1]
-    if (props.currentPage < 4) for (let i = 2; i <= 6; i++) pageNumbersArray.push(i)
-    else if (props.currentPage > pagesQuantity - 4) for (let i = pagesQuantity - 5; i < pagesQuantity; i++) pageNumbersArray.push(i)
-    else for (let i = props.currentPage - 2; i <= props.currentPage + 2; i++) pageNumbersArray.push(i)
-    pageNumbersArray.push(pagesQuantity)
-
+const Users = ({
+    totalUsersCount, usersOnPage, currentPage, onPageChanged,
+    users, followUser, unfollowUser, followingInProgress, isAuth
+}) => {
     return (
         <div>
-
-            <div className={s.pageSelector}>
-                {pageNumbersArray.map(p => (
-                    <button
-                        key={p}
-                        disabled={props.currentPage === p}
-                        className={`${s.pageNumberButton}  ${p === props.currentPage ? s.currentPage : ''}`}
-                        onClick={() => props.onPageChanged(p)}
-                    >
-                        {p}
-                    </button>)
-                )}
-            </div>
-            {props.users.map(u => <User
+            <Paginator totalUsersCount={totalUsersCount} usersOnPage={usersOnPage} currentPage={currentPage}
+                       onPageChanged={onPageChanged }/>
+            {users.map(u => <User
                 key={u.id} userData={u}
-                followUser={props.followUser} unfollowUser={props.unfollowUser}
-                followingInProgress={props.followingInProgress}
-                isAuth={props.isAuth}
+                followUser={followUser} unfollowUser={unfollowUser}
+                followingInProgress={followingInProgress}
+                isAuth={isAuth}
             />)}
         </div>)
 }

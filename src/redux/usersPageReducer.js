@@ -1,21 +1,20 @@
 import { usersAPI } from '../api/api'
 import { toggleFetching } from './appReducer'
+import { updateObjectInArray } from '../utils/objectHelpers'
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-// const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
-const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING'
-const FAKE = 'FAKE'
+const FOLLOW = 'usersPage/FOLLOW'
+const UNFOLLOW = 'usersPage/UNFOLLOW'
+const SET_USERS = 'usersPage/SET_USERS'
+const SET_CURRENT_PAGE = 'usersPage/SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'usersPage/SET_TOTAL_USERS_COUNT'
+const TOGGLE_FOLLOWING = 'usersPage/TOGGLE_FOLLOWING'
+const FAKE = 'usersPage/FAKE'
 
 let initialState = {
     users: [],
     totalUsersCount: 0,
     usersOnPage: 20,
     currentPage: 1,
-    // isFetching: true,
     followingInProgress: [],
     fake: 0,
 }
@@ -24,12 +23,13 @@ const usersPageReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userId ? { ...u, followed: true } : u)
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userId ? { ...u, followed: false } : u)
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: false})
+                // users: state.users.map(u => u.id === action.userId ? { ...u, followed: false } : u)
             }
         case SET_USERS:
             return {
@@ -47,11 +47,7 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 totalUsersCount: action.totalUsersCount,
             }
-        // case TOGGLE_FETCHING:
-        //     return {
-        //         ...state,
-        //         isFetching: action.isFetching,
-        //     }
+
         case TOGGLE_FOLLOWING:
             return {
                 ...state,
@@ -59,7 +55,7 @@ const usersPageReducer = (state = initialState, action) => {
                     ? [...state.followingInProgress, action.id]
                     : [...state.followingInProgress.filter(id => id !== action.id)]
             }
-       case FAKE:
+        case FAKE:
             return {
                 ...state,
                 fake: state.fake + 1
@@ -74,37 +70,29 @@ export const unfollowAC = userId => ({ type: UNFOLLOW, userId })
 export const setUsers = users => ({ type: SET_USERS, users })
 export const setCurrentPage = currentPage => ({ type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = totalUsersCount => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
-// export const toggleFetching = isFetching => ({ type: TOGGLE_FETCHING, isFetching })
 export const toggleFollowing = (following, id) => ({ type: TOGGLE_FOLLOWING, following, id })
 
-export const requestUsers = (usersOnPage, page) => dispatch => {
+export const requestUsers = (usersOnPage, page) => async dispatch => {
     dispatch(toggleFetching(true))
-    usersAPI.getUsers(usersOnPage, page)
-        .then(response => {
-            dispatch(setUsers(response.data.items))
-            dispatch(setTotalUsersCount(response.data.totalCount))
-            dispatch(toggleFetching(false))
-        })
+    const response = await usersAPI.getUsers(usersOnPage, page)
+    dispatch(setUsers(response.data.items))
+    dispatch(setTotalUsersCount(response.data.totalCount))
+    dispatch(toggleFetching(false))
 }
-export const unfollowUser = (userId) => dispatch => {
+
+const followUnfollowFlow = async (dispatch, userId, APIMethod, actionCreator) => {
     dispatch(toggleFollowing(true, userId)) // диспатчим в стор инфу, что начался запрос на сервер и id пользователя, по которому идет запрос
-    usersAPI.unfollowUser(userId) // запускаем функцию DAL уровня
-        .then(response => {  // получив ответ от сервера ...
-            if (response.data.resultCode === 0) {  // проверяем, что статус ОК
-                dispatch(unfollowAC(userId)) // диспатчим в стор инфу что мы отписались
-                dispatch(toggleFollowing(false, userId)) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
-            }
-        })
+    const response = await APIMethod(userId)// запускаем функцию DAL уровня
+    if (response.data.resultCode === 0) {  // получив ответ от сервера ... проверяем, что статус ОК
+        dispatch(actionCreator(userId)) // диспатчим в стор инфу что мы отписались
+        dispatch(toggleFollowing(false, userId)) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
+    }
 }
-export const followUser = (userId) => dispatch => {
-    dispatch(toggleFollowing(true, userId)) // диспатчим в стор инфу, что начался запрос на сервер и id пользователя, по которому идет запрос
-    usersAPI.followUser(userId) // запускаем функцию DAL уровня
-        .then(response => {  // получив ответ от сервера ...
-            if (response.data.resultCode === 0) {  // проверяем, что статус ОК
-                dispatch(followAC(userId)) // диспатчим в стор инфу что мы отписались
-                dispatch(toggleFollowing(false, userId)) // диспатчим в стор инфу что сейчвс к серверу идет запрос по юзеру с ID
-            }
-        })
+export const unfollowUser = userId => async dispatch => {
+    await followUnfollowFlow(dispatch, userId, usersAPI.unfollowUser.bind(usersAPI), unfollowAC)
+}
+export const followUser = userId => async dispatch => {
+    await followUnfollowFlow(dispatch, userId, usersAPI.followUser.bind(usersAPI), followAC)
 }
 
 export default usersPageReducer
