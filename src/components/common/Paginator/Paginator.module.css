@@ -1,11 +1,16 @@
 .pageSelector {
-
+    text-align: center;
 }
 
 .currentPage {
     font-weight:800;
+    color: black;
 }
 
 .pageNumberButton {
-    width: 50px;
+    width: 40px;
+}
+
+.arrowButton {
+    background-color: darkgrey;
 }

@@ -9,7 +9,7 @@ const Users = ({
 }) => {
     return (
         <div>
-            <Paginator totalUsersCount={totalUsersCount} usersOnPage={usersOnPage} currentPage={currentPage}
+            <Paginator totalItemsCount={totalUsersCount} itemsOnPage={usersOnPage} currentPage={currentPage}
                        onPageChanged={onPageChanged }/>
             {users.map(u => <User
                 key={u.id} userData={u}
