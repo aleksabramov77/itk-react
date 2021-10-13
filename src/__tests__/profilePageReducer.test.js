@@ -1,4 +1,4 @@
-import profilePageReducer, { addPost, deletePost } from './profilePageReducer'
+import profilePageReducer, { addPost, deletePost } from '../redux/profilePageReducer'
 
     // 1. test data
     let action = addPost('TEST TEXT')
