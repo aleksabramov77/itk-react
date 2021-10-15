@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/aleksabramov77/itk-react/static/css/main.61c8ba25.chunk.css",
+    "main.js": "/aleksabramov77/itk-react/static/js/main.6df52116.chunk.js",
+    "main.js.map": "/aleksabramov77/itk-react/static/js/main.6df52116.chunk.js.map",
+    "runtime-main.js": "/aleksabramov77/itk-react/static/js/runtime-main.d5b70eea.js",
+    "runtime-main.js.map": "/aleksabramov77/itk-react/static/js/runtime-main.d5b70eea.js.map",
+    "static/js/2.ed603c8a.chunk.js": "/aleksabramov77/itk-react/static/js/2.ed603c8a.chunk.js",
+    "static/js/2.ed603c8a.chunk.js.map": "/aleksabramov77/itk-react/static/js/2.ed603c8a.chunk.js.map",
+    "static/css/3.602efbdf.chunk.css": "/aleksabramov77/itk-react/static/css/3.602efbdf.chunk.css",
+    "static/js/3.e901e7ff.chunk.js": "/aleksabramov77/itk-react/static/js/3.e901e7ff.chunk.js",
+    "static/js/3.e901e7ff.chunk.js.map": "/aleksabramov77/itk-react/static/js/3.e901e7ff.chunk.js.map",
+    "static/css/4.0e459d87.chunk.css": "/aleksabramov77/itk-react/static/css/4.0e459d87.chunk.css",
+    "static/js/4.d33892ca.chunk.js": "/aleksabramov77/itk-react/static/js/4.d33892ca.chunk.js",
+    "static/js/4.d33892ca.chunk.js.map": "/aleksabramov77/itk-react/static/js/4.d33892ca.chunk.js.map",
+    "static/js/5.bf72da70.chunk.js": "/aleksabramov77/itk-react/static/js/5.bf72da70.chunk.js",
+    "static/js/5.bf72da70.chunk.js.map": "/aleksabramov77/itk-react/static/js/5.bf72da70.chunk.js.map",
+    "static/js/6.0244bbb9.chunk.js": "/aleksabramov77/itk-react/static/js/6.0244bbb9.chunk.js",
+    "static/js/6.0244bbb9.chunk.js.map": "/aleksabramov77/itk-react/static/js/6.0244bbb9.chunk.js.map",
+    "static/js/7.923ce158.chunk.js": "/aleksabramov77/itk-react/static/js/7.923ce158.chunk.js",
+    "static/js/7.923ce158.chunk.js.map": "/aleksabramov77/itk-react/static/js/7.923ce158.chunk.js.map",
+    "static/js/8.555acbc8.chunk.js": "/aleksabramov77/itk-react/static/js/8.555acbc8.chunk.js",
+    "static/js/8.555acbc8.chunk.js.map": "/aleksabramov77/itk-react/static/js/8.555acbc8.chunk.js.map",
+    "index.html": "/aleksabramov77/itk-react/index.html",
+    "static/css/3.602efbdf.chunk.css.map": "/aleksabramov77/itk-react/static/css/3.602efbdf.chunk.css.map",
+    "static/css/4.0e459d87.chunk.css.map": "/aleksabramov77/itk-react/static/css/4.0e459d87.chunk.css.map",
+    "static/css/main.61c8ba25.chunk.css.map": "/aleksabramov77/itk-react/static/css/main.61c8ba25.chunk.css.map",
+    "static/js/2.ed603c8a.chunk.js.LICENSE.txt": "/aleksabramov77/itk-react/static/js/2.ed603c8a.chunk.js.LICENSE.txt",
+    "static/media/Spinner-1s-200px.a77e97c8.svg": "/aleksabramov77/itk-react/static/media/Spinner-1s-200px.a77e97c8.svg",
+    "static/media/defaultAvatar.png": "/aleksabramov77/itk-react/static/media/defaultAvatar.031be920.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d5b70eea.js",
+    "static/js/2.ed603c8a.chunk.js",
+    "static/css/main.61c8ba25.chunk.css",
+    "static/js/main.6df52116.chunk.js"
+  ]
+}
