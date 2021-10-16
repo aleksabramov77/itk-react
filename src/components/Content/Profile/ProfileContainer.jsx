@@ -3,27 +3,32 @@ import { connect } from 'react-redux'
 import Profile from './Profile'
 import { getUserProfile, getUserStatus, setUserProfileData, updateUserStatus } from '../../../redux/profilePageReducer'
 import { withRouter } from 'react-router'
-import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 import { compose } from 'redux'
 import Preloader from '../../common/Preloader/Preloader'
-import { NavLink, Redirect } from 'react-router-dom'
+// import { NavLink, Redirect } from 'react-router-dom'
 
 class ProfileContainer extends React.Component {
-    componentDidMount () {
+    refreshProfile () {
         const userId = this.props.match.params.userId || this.props.authId // получаем userId из Match благодаря оборачиванию в withRouter
         if (!userId) this.props.history.push('/login')
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
-        // debugger
+    }
+
+    componentDidMount () {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate (prevProps, prevState, snapshots) {
+        if (prevProps.match.params.userId != this.props.match.params.userId) {
+            this.refreshProfile()
+        }
     }
 
     render () {
-        // debugger
-
         // if(!(this.props.match.params.userId || this.props.userProfile.userId)) return <Redirect to='/login'/>
 
         return (
-
             <div>
                 {this.props.isFetching ? <Preloader/> : null}
                 <Profile
@@ -52,8 +57,7 @@ export default compose(
             getUserProfile, getUserStatus,
             updateUserStatus, setUserProfileData
         }
-        ),
+    ),
     withRouter,
-    // withAuthRedirect
 )
 (ProfileContainer)
