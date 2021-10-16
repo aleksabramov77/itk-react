@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import s from './ProfileStatus.module.css'
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
 
 /* Functional implementation with hooks */
 const ProfileStatus = props => {
@@ -25,7 +25,6 @@ const ProfileStatus = props => {
     const onStatusChange = e => {
         setStatus(e.currentTarget.value)
     }
-
 
     return (
         <div>

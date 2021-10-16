@@ -15,11 +15,6 @@ const Paginator = ({
         i <= Math.min(pagesQuantity, portionNumber * pagesOnScreen);
         i++) pageNumbersArray.push(i)
 
-    // if (currentPage < 4) for (let i = 2; i <= 6; i++) pageNumbersArray.push(i)
-    // else if (currentPage > pagesQuantity - 4) for (let i = pagesQuantity - 5; i < pagesQuantity; i++) pageNumbersArray.push(i)
-    // else for (let i = currentPage - 2; i <= currentPage + 2; i++) pageNumbersArray.push(i)
-    // pageNumbersArray.push(pagesQuantity)
-
     return (
         <div className={s.pageSelector}>
 

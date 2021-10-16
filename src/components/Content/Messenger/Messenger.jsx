@@ -3,8 +3,7 @@ import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
 import React from 'react'
 import { Form, Field } from 'react-final-form'
-
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import { composeValidators, maxLength, minLength, required } from '../../../utils/validators/validators'
 import { Textarea } from '../../common/FormsControls/FormsControls'
 

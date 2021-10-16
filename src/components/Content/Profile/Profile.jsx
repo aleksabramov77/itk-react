@@ -5,15 +5,20 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
 
-const Profile = props => {
-    // console.log('Profile - status: ', props.status)
-  return (
+const Profile = ({ authId, userProfile, status, updateUserStatus, isOwner,
+    updatePhoto
+}) => {
+    // console.log('Profile - status: ', status)
+    // debugger
+    return (
     <div>
       <ProfileInfo className={s.profileInfoBlock}
-                   authId={props.authId}
-                   userProfile={props.userProfile}
-                   status={props.status}
-                   updateUserStatus={props.updateUserStatus}
+                   authId={authId}
+                   userProfile={userProfile}
+                   status={status}
+                   updateUserStatus={updateUserStatus}
+                   isOwner={isOwner}
+                   updatePhoto={updatePhoto}
       />
       <MyPostsContainer
           className={s.profileInfoBlock}

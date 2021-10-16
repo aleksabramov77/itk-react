@@ -22,7 +22,7 @@ class App extends React.Component {
             // <BrowserRouter basename={process.env.PUBLIC_URL}>
             <HashRouter>
                 <div className={s.appWrapper}>
-                    <d1iv className={s.block + ' ' + s.header}><HeaderContainer/></d1iv>
+                    <div className={s.block + ' ' + s.header}><HeaderContainer/></div>
                     <div className={s.block + ' ' + s.navbar}><Navbar/></div>
                     <div className={s.block + ' ' + s.content}><Content/></div>
                 </div>

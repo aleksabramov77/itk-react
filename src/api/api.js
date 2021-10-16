@@ -27,7 +27,16 @@ export const profileAPI = {
     getUserStatus: userId =>
         instance.get(`profile/status/${userId}`),
     updateUserStatus: status =>
-        instance.put(`profile/status`, { status: status })
+        instance.put(`profile/status`, { status: status }),
+    updatePhoto: photo => {
+        let formData = new FormData();
+        formData.append("image", photo);
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }
 }
 
 export const authAPI = {
