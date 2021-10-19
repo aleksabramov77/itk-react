@@ -3,3 +3,8 @@
     font-weight: 500;
     font-style: italic;
 }
+
+.statusInputBlock {
+    box-sizing: border-box;
+    width: 100%;
+}

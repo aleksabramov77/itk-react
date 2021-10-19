@@ -31,12 +31,15 @@ export const profileAPI = {
     updatePhoto: photo => {
         let formData = new FormData();
         formData.append("image", photo);
+        // debugger
         return instance.put(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
-    }
+    },
+    updateProfileData: formData =>
+        instance.put(`profile`, { ...formData, ...formData.contacts }),
 }
 
 export const authAPI = {

@@ -20,7 +20,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
-                // isAuth: true,
             }
 
         default:
@@ -45,8 +44,11 @@ export const logIn = (email, password, rememberMe) => async dispatch => {
     dispatch(toggleFetching(true))
     const response = await authAPI.logIn(email, password, rememberMe)
     dispatch(toggleFetching(false))
-    if (response.data.resultCode === 0) dispatch(getAuthUserData())
-    else return { [FORM_ERROR]: response.data.messages[0] }
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        return { [FORM_ERROR]: response.data.messages[0] }
+    }
 }
 
 export const logOut = () => async dispatch => {

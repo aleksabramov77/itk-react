@@ -9,7 +9,6 @@ let mapStateToProps = state => ({
 })
 
 
-
 export default connect(mapStateToProps, {
     addPost,
 })(MyPosts)

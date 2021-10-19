@@ -1,5 +1,6 @@
 import { profileAPI } from '../api/api'
 import { toggleFetching } from './appReducer'
+import { FORM_ERROR } from 'final-form'
 
 const ADD_POST = 'profilePage/ADD_POST'
 const DELETE_POST = 'profilePage/DELETE_POST'
@@ -11,18 +12,20 @@ let initialState = {
     status: '',
     userProfile: {
         userId: null,
-        lookingForAJob: null,
-        lookingForAJobDescription: null,
-        fullName: null,
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        fullName: '',
+        aboutMe: '',
+
         contacts: {
-            github: null,
-            vk: null,
-            facebook: null,
-            instagram: null,
-            twitter: null,
-            website: null,
-            youtube: null,
-            mainLink: null,
+            // github: null,
+            // vk: null,
+            // facebook: null,
+            // instagram: null,
+            // twitter: null,
+            // website: null,
+            // youtube: null,
+            // mainLink: null,
         },
         photos: {
             small: null,
@@ -53,7 +56,7 @@ const profilePageReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                postsData: [...state.postsData.filter(p => p.id != action.id)],
+                postsData: [...state.postsData.filter(p => p.id !== action.id)],
             }
 
         case SET_USER_PROFILE_DATA:
@@ -119,6 +122,19 @@ export const updatePhoto = photo => async dispatch => {
     if (response.data.resultCode === 0) {
         dispatch(setProfilePhoto(response.data.data.photos))
         dispatch(toggleFetching(false))
+    }
+}
+
+export const updateProfileData = formData => async dispatch => {
+    toggleFetching(true)
+    const response = await profileAPI.updateProfileData(formData)
+    // debugger
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(formData.userId))
+        dispatch(toggleFetching(false))
+    } else {
+        return { contacts: {vk: response.data.messages[0] }}
+        // return { [FORM_ERROR]: response.data.messages[0] }
     }
 }
 

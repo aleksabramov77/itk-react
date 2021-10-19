@@ -1,52 +1,89 @@
 .profileMainBlock {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 4fr;
     grid-template-rows: auto;
     grid-template-areas:
-    'avatar contac'
-    'fulNam contac'
-    'aboutM contac'
-    'jobDes contac'
-    'lookJb NNNNNN'
-    'profst profst';
+    'profSt profSt'
+    'avatar proDat';
 }
 
 .profileAvatarBlock {
     grid-area: avatar;
-    border-radius: 5px;
-    /*padding: 0px;*/
-    width: 50%;
-}
-
-.profileAvatar {
     width: 100%;
 }
 
-.fullNameBlock {
-    grid-area: fulNam;
-    font-weight: 700;
+.profileAvatar {
+    width: 80%;
+    border-radius: 50%;
 }
 
-.aboutMeBlock {
-    grid-area: aboutM;
-    font-size: small;
-}
-
-.lookingForAJobDescriptionBlock {
-    grid-area: jobDes;
-    font-weight: bold;
-
-}
-
-.lookingForAJobBlock {
-    grid-area: lookJb;
-}
-
-.contactsBlock {
-    grid-area: contac;
-    align-self: end;
+.profileDataBlock {
+    grid-area: proDat;
 }
 
 .profileStatusBlock {
-    grid-area: profst;
+    width: 100%;
+    grid-area: profSt;
+    margin-bottom: 30px;
 }
+
+.profileDataItem {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto;
+    /*grid-template-areas:*/
+    /*'avatar proDat'*/
+}
+
+.profileDataItem_value input {
+    box-sizing: border-box;
+
+    width: 100%;
+}
+
+.contactsBlock  .profileDataItem {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /*grid-template-rows: auto;*/
+    grid-template-areas:
+    'datTyp datVal';
+}
+
+.contactsBlock .profileDataItem_type {
+    grid-area: datTyp;
+    justify-self: end;
+    margin-right: 20px;
+    align-self: end;
+    font-style: italic;
+}
+.contactsBlock  .profileDataItem_value  {
+    grid-area: datVal;
+    /*margin-left: 20px;*/
+    /*align-self: end;*/
+}
+
+
+
+
+
+
+/*.fullNameBlock {*/
+/*    grid-area: fulNam;*/
+/*    font-weight: 700;*/
+/*}*/
+
+/*.aboutMeBlock {*/
+/*    grid-area: aboutM;*/
+/*    font-size: small;*/
+/*}*/
+
+/*.lookingForAJobBlock {*/
+/*    grid-area: lookJb;*/
+/*}*/
+
+/*.lookingForAJobDescriptionBlock {*/
+/*    grid-area: jobDes;*/
+/*    !*font-weight: bold;*!*/
+/*}*/
+
+

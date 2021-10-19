@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import s from './ProfileStatus.module.css'
 // import { createStore } from 'redux'
 
 /* Functional implementation with hooks */
 const ProfileStatus = props => {
-    let [editMode, setEditMode] = useState(false)
-    let [status, setStatus] = useState(props.status)
+    let [editMode, setEditMode] = React.useState(false)
+    let [status, setStatus] = React.useState(props.status)
 
-    useEffect(() => {
+    React.useEffect(() => {
         setStatus(props.status)
     }, [props.status])
 

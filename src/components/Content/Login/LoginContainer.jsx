@@ -12,7 +12,7 @@ class LoginContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     isAuth: state.auth.isAuth,
 })
 export default connect(mapStateToProps, {logIn})(LoginContainer)

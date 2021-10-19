@@ -5,7 +5,23 @@ import React from 'react'
 import s from '../Messenger/Messenger.module.css'
 import { Redirect } from 'react-router-dom'
 
-const LoginForm = ({ onSubmit }) =>
+const Login = ({isAuth,  logIn }) => {
+
+    // const logIn = ({ email, password, rememberMe }) => props.logIn(email, password, rememberMe)
+
+    if (isAuth) return <Redirect to='/profile'/>
+
+    return (
+        <div>
+            <h1>Login</h1>
+            <LoginForm logIn={logIn} />
+        </div>
+    )
+}
+
+const LoginForm = ({ logIn }) => {
+    const onSubmit = ({ email, password, rememberMe }) => logIn(email, password, rememberMe)
+    return (
     <Form
         // className={s.correct}
         onSubmit={onSubmit}
@@ -21,6 +37,8 @@ const LoginForm = ({ onSubmit }) =>
         }) => {
             // form.reset()
             // debugger
+            // console.log('submitError = ', submitError)
+
             return (
                 <form
                     onSubmit={handleSubmit}
@@ -31,7 +49,6 @@ const LoginForm = ({ onSubmit }) =>
                     <Field
                         name='email'
                         className={submitError ? s.submitError : s.correct}
-
                         component={Input}
                         placeholder='Email'
                         validate={composeValidators(
@@ -43,7 +60,6 @@ const LoginForm = ({ onSubmit }) =>
                     <Field
                         name='password'
                         className={submitError ? s.submitError : s.correct}
-
                         placeholder='Password'
                         component={Input}
                         type='password'
@@ -78,19 +94,7 @@ const LoginForm = ({ onSubmit }) =>
             )
         }
         }
-    />
-
-const Login = props => {
-    const logIn = ({ email, password, rememberMe }) => props.logIn(email, password, rememberMe)
-
-    if (props.isAuth) return <Redirect to='/profile'/>
-
-    return (
-        <div>
-            <h1>Login</h1>
-            <LoginForm onSubmit={logIn}/>
-        </div>
-    )
+    />)
 }
 
 export default Login

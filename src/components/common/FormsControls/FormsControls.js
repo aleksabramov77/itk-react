@@ -28,13 +28,11 @@ import s from './FormsControls.module.css'
 
 // Второй метод
 export const Element = Element => ({ input, meta, ...props }) => {
-    const hasError = meta.touched && meta.error
-    // const hasError = (meta.touched && meta.error) || meta.submitError
+    const hasError = meta.submitError || (meta.touched && meta.error)
     return (
         <div className={ s.formControl + " " + (hasError ? s.error : "") }>
+            { hasError && <span> { meta.error || meta.submitError} </span> }
             <Element {...input} {...props} />
-            { hasError && <span> { meta.error} </span> }
-            {/*{ hasError && <span> { meta.error  || meta.submitError } </span> }*/}
         </div>
     )
 }

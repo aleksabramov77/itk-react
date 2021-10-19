@@ -2,15 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
 import {
-    getUserProfile,
-    getUserStatus,
-    setUserProfileData,
-    updateUserStatus,
-    updatePhoto
+    getUserProfile, getUserStatus, setUserProfileData, updateUserStatus, updatePhoto, updateProfileData
 } from '../../../redux/profilePageReducer'
 import { withRouter } from 'react-router'
 import { compose } from 'redux'
 import Preloader from '../../common/Preloader/Preloader'
+
 // import { Redirect } from 'react-router-dom'
 
 class ProfileContainer extends React.Component {
@@ -19,8 +16,7 @@ class ProfileContainer extends React.Component {
         const userId = this.props.match.params.userId || this.props.authId // получаем userId из Match благодаря оборачиванию в withRouter
         if (!userId) {
             this.props.history.push('/login')
-        }
-        else {
+        } else {
             this.props.getUserProfile(userId)
             this.props.getUserStatus(userId)
         }
@@ -37,20 +33,16 @@ class ProfileContainer extends React.Component {
     }
 
     render () {
-        // if (!this.props.match.params.userId && !this.props.userProfile.userId) {
-        //     // debugger
-        //     return <Redirect to='/login'/>
-        // }
+        // if (!this.props.match.params.userId && !this.props.userProfile.userId) { return <Redirect to='/login'/>}
         return (
             <div>
                 {this.props.isFetching ? <Preloader/> : null}
                 <Profile
-                    authId={this.props.authId}
-                    userProfile={this.props.userProfile}
-                    status={this.props.status}
-                    updateUserStatus={this.props.updateUserStatus}
+                    authId={this.props.authId} userProfile={this.props.userProfile}
+                    status={this.props.status} updateUserStatus={this.props.updateUserStatus}
                     isOwner={!this.props.match.params.userId || String(this.props.match.params.userId) === String(this.props.authId)}
                     updatePhoto={this.props.updatePhoto}
+                    updateProfileData={this.props.updateProfileData}
                 />
             </div>
         )
@@ -71,7 +63,7 @@ export default compose(
         {
             getUserProfile, getUserStatus,
             updateUserStatus, setUserProfileData,
-            updatePhoto
+            updatePhoto, updateProfileData,
         }
     ),
     withRouter,
