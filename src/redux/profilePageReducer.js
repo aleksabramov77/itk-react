@@ -133,7 +133,12 @@ export const updateProfileData = formData => async dispatch => {
         dispatch(getUserProfile(formData.userId))
         dispatch(toggleFetching(false))
     } else {
-        return { contacts: {vk: response.data.messages[0] }}
+        const errorsObj = {contacts:{}}
+        response.data.messages.map(m => {
+        const errorMessage = m.split('->')[1].replace(')','').toLowerCase()
+            errorsObj.contacts[errorMessage] = m
+        })
+        return errorsObj
         // return { [FORM_ERROR]: response.data.messages[0] }
     }
 }
