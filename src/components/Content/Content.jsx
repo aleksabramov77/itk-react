@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Switch, Redirect, Route } from 'react-router-dom'
 import s from './Content.module.css'
 import ProfileContainer from './Profile/ProfileContainer'
 import LoginContainer from './Login/LoginContainer'
@@ -16,14 +16,18 @@ const Content = () => {
         <div className={s.appWrapperContent}>
             <div className={s.contentHeadImage}></div>
             <div className={s.dynamicContent}>
-                <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                 <React.Suspense fallback={<Preloader/>}>
-                    <Route path="/messenger" render={() => <MessengerContainer/>}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <LoginContainer/>}/>
+                    <Switch>
+                        <Redirect exact from="/" to="/profile"/>
+                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                        <Route path="/messenger" render={() => <MessengerContainer/>}/>
+                        <Route path="/users" render={() => <UsersContainer/>}/>
+                        <Route path="/news" render={() => <News/>}/>
+                        <Route path="/music" render={() => <Music/>}/>
+                        <Route path="/settings" render={() => <Settings/>}/>
+                        <Route path='/login' render={() => <LoginContainer/>}/>
+                        <Route path="*" render={() => <div> 404 Not Found </div>}/>
+                    </Switch>
                 </React.Suspense>
             </div>
         </div>

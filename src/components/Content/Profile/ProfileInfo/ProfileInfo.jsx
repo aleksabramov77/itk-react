@@ -90,9 +90,8 @@ const ProfileDataForm = ({ userProfile, editMode, authId, exitEditMode, updatePr
 
     const onSubmit = async formData => {
         const response = await updateProfileData(formData)
-        // console.log('After onSubmitButton:  ', response)
-        console.log('response =', response)
-        if (response) {return response} else exitEditMode()
+        if (response) return response
+        exitEditMode()
     }
 
     return (
@@ -100,20 +99,13 @@ const ProfileDataForm = ({ userProfile, editMode, authId, exitEditMode, updatePr
             onSubmit={onSubmit}
             initialValues={initialValues}
             render={({
-                submitError, handleSubmit, invalid, error, hasValidationErrors,
-                reset,submitting, pristine, values, ...other
+                submitError, handleSubmit, hasValidationErrors,
+                submitting, pristine,
             }) => {
-                console.log('submitError =', submitError)
-                // console.log('submitting =', submitting)
-                // console.log('pristine =', pristine)
-                // console.log('invalid =', invalid)
-                // console.log('other =', other)
-                // debugger
 
                 return (
                     <form onSubmit={handleSubmit}>
                         <button type="submit"
-                                // disabled={submitting || pristine}
                                 disabled={submitting || pristine || hasValidationErrors}
                         >
                             Submit
