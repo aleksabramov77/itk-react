@@ -2,7 +2,7 @@
   "name": "react-kabzda-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aleksabramov77.github.io/itk-react/",
+  "homepage": "https://aleksabramov77.github.io/social-network/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

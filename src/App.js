@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './App.module.css'
-import { BrowserRouter } from 'react-router-dom'
-// import { HashRouter } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Content from './components/Content/Content'
 import HeaderContainer from './components/Header/HeaderContainer'
@@ -30,13 +30,13 @@ class App extends React.Component {
         if (!this.props.initialized) return <Preloader />
         return (
             // <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <BrowserRouter>
+            <HashRouter>
                 <div className={s.appWrapper}>
                     <div className={s.block + ' ' + s.header}><HeaderContainer/></div>
                     <div className={s.block + ' ' + s.navbar}><Navbar/></div>
                     <div className={s.block + ' ' + s.content}><Content/></div>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         )
     }
 }
