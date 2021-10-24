@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/Content/Messenger/DialogItem/DialogItem.module.css"],"names":[],"mappings":"AAGA,4BACI,oBACJ,CAEA,0BACE,SACF","file":"3.602efbdf.chunk.css","sourcesContent":[".dialog {\r\n}\r\n\r\n.dialog a{\r\n    text-decoration: none;\r\n}\r\n\r\n.active {\r\n  color: red;\r\n}\r\n"]}
