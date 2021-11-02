@@ -1,7 +1,6 @@
 import React from 'react'
 import s from './App.module.css'
-// import { BrowserRouter } from 'react-router-dom'
-import { HashRouter } from 'react-router-dom'
+// import { HashRouter } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Content from './components/Content/Content'
 import HeaderContainer from './components/Header/HeaderContainer'
@@ -9,7 +8,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from './redux/appReducer'
 import Preloader from './components/common/Preloader/Preloader'
-
+import {BrowserRouter} from "react-router-dom";
 
 class App extends React.Component {
     catchAllUnhandledErrors = (reason, promise) => {
@@ -22,21 +21,23 @@ class App extends React.Component {
         window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
-    componentWillUnmount    () {
+    componentWillUnmount () {
         window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render () {
-        if (!this.props.initialized) return <Preloader />
+        if (!this.props.initialized) return <Preloader/>
         return (
-            // <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <HashRouter>
+            <BrowserRouter>
+            {/*<BrowserRouter basename={process.env.PUBLIC_URL}>*/}
+                {/*<HashRouter>*/}
                 <div className={s.appWrapper}>
                     <div className={s.block + ' ' + s.header}><HeaderContainer/></div>
                     <div className={s.block + ' ' + s.navbar}><Navbar/></div>
                     <div className={s.block + ' ' + s.content}><Content/></div>
                 </div>
-            </HashRouter>
+                {/*</HashRouter>*/}
+            </BrowserRouter>
         )
     }
 }
