@@ -1,55 +1,66 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './ProfileStatus.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../../../../redux/redux-store";
+import {updateUserStatus} from "../../../../../redux/profilePageReducer";
 // import { createStore } from 'redux'
 
+
 /* Functional implementation with hooks */
-const ProfileStatus = props => {
-    let [editMode, setEditMode] = React.useState(false)
-    let [status, setStatus] = React.useState(props.status)
+type PropsType = {
+  authId: number|null
+  userId: number
+}
+const ProfileStatus: React.FC<PropsType> = ({authId, userId}) => {
+  const dispatch = useDispatch()
+  const propsStatus = useSelector((state: AppStateType) => state.profilePage.status)
 
-    React.useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
+  let [editMode, setEditMode] = React.useState(false)
+  let [status, setStatus] = React.useState(propsStatus)
 
-    const activateEditMode = () => {
-        if (props.authId === props.userId) {
-            setEditMode(true)
-        }
+  React.useEffect(() => {
+    setStatus(propsStatus)
+  }, [propsStatus])
+
+  const activateEditMode = () => {
+    if (authId === userId) {
+      setEditMode(true)
     }
+  }
 
-    const deactivateEditMode = () => {
-        setEditMode(false)
-        props.updateUserStatus(status)
-    }
+  const deactivateEditMode = () => {
+    setEditMode(false)
+    dispatch(updateUserStatus(status))
+  }
 
-    const onStatusChange = e => {
-        setStatus(e.currentTarget.value)
-    }
+  const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setStatus(e.currentTarget.value)
+  }
 
-    return (
-        <div>
-            {
-                editMode
-                    ? <div>
-                        <input
-                            className={s.statusInputBlock}
-                            onChange={onStatusChange}
-                            autoFocus={true}                                 /* автофокус на элементе */
-                            onBlur={deactivateEditMode}      /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст */
-                            value={status}
-                        />
-                    </div>
-                    : <div>
+  return (
+    <div>
+      {
+        editMode
+          ? <div>
+            <input
+              className={s.statusInputBlock}
+              onChange={onStatusChange}
+              autoFocus={true}                                 /* автофокус на элементе */
+              onBlur={deactivateEditMode}      /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст */
+              value={status}
+            />
+          </div>
+          : <div>
                             <span
-                                className={s.statusBlock}
-                                onDoubleClick={activateEditMode}    /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст  */
+                              className={s.statusBlock}
+                              onDoubleClick={activateEditMode}    /* событие при убирании фокуса с элемента. bind - т.к. иначе теряется контекст  */
                             >
                             {status || 'No status'}
                             </span>
-                    </div>
-            }
-        </div>
-    )
+          </div>
+      }
+    </div>
+  )
 }
 export default ProfileStatus
 

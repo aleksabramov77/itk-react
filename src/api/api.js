@@ -31,21 +31,22 @@ export const profileAPI = {
     updatePhoto: photo => {
         let formData = new FormData();
         formData.append("image", photo);
-        // debugger
         return instance.put(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
     },
-    updateProfileData: formData =>
-        instance.put(`profile`, { ...formData, ...formData.contacts }),
+    updateProfileData: updateProfileData => {
+        delete updateProfileData['photos']
+        return instance.put(`profile`, { ...updateProfileData, ...updateProfileData.contacts })
+    }
 }
 
 export const authAPI = {
     me: () =>
         instance.get(`auth/me`),
-    logIn: (email, password, rememberMe, captcha = '') =>
+    logIn: ({ email, password, rememberMe, captcha = '' }) =>
         instance.post(`auth/login`, { email, password, rememberMe, captcha }),
     logOut: () =>
         instance.delete(`auth/login`),

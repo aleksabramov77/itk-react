@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 import s from './Content.module.css'
 import ProfileContainer from './Profile/ProfileContainer'
-import LoginContainer from './Login/LoginContainer'
+import Login from './Login/Login'
 import Preloader from '../common/Preloader/Preloader'
 
 const MessengerContainer = React.lazy(() => import('./Messenger/MessengerContainer'))
@@ -11,7 +11,7 @@ const News = React.lazy(() => import('./News/News'))
 const Music = React.lazy(() => import('./Music/Music'))
 const Settings = React.lazy(() => import('./Settings/Settings'))
 
-const Content = () => {
+const Content: React.FC = () => {
     return (
         <div className={s.appWrapperContent}>
             <div className={s.contentHeadImage}></div>
@@ -25,7 +25,7 @@ const Content = () => {
                         <Route path="/news" render={() => <News/>}/>
                         <Route path="/music" render={() => <Music/>}/>
                         <Route path="/settings" render={() => <Settings/>}/>
-                        <Route path='/login' render={() => <LoginContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
                         <Route path="*" render={() => <div> 404 Not Found </div>}/>
                     </Switch>
                 </React.Suspense>

@@ -1,8 +1,9 @@
 export type PhotosType = {
-  small: string | null
-  large: string | null
+  small: string
+  large: string
 }
 export type ContactsType = {
+  [index:string]: string
   github: string
   vk: string
   facebook: string

@@ -3,6 +3,7 @@
 const ADD_MESSAGE = 'messengerPage/ADD_MESSAGE';
 
 
+
 /* Initial state */
 
 type InitialState = {
@@ -29,9 +30,10 @@ const initialState: InitialState = {
 };
 
 
+
 /* Reducer */
 
-const messengerPageReducer = (state = initialState, action: any): InitialState => {
+const messengerPageReducer = (state = initialState, action: ActionTypes): InitialState => {
   switch (action.type) {
 
     case ADD_MESSAGE:
@@ -49,13 +51,17 @@ const messengerPageReducer = (state = initialState, action: any): InitialState =
 };
 
 
+
 /* Action Creators */
 
-type AddMessageACType = (newMessageText: string) => {
+type ActionTypes = AddMessageActionType
+
+type AddMessageActionType = {
   type: typeof ADD_MESSAGE
   newMessageText: string
 }
-export const addMessage: AddMessageACType = (newMessageText) => ({type: ADD_MESSAGE, newMessageText});
+export const addMessage = (newMessageText: string): AddMessageActionType => ({type: ADD_MESSAGE, newMessageText});
+
 
 
 /* Default export */

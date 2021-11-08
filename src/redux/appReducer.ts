@@ -1,4 +1,6 @@
 import {getAuthUserData} from './authReducer'
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 
 /* Actions types */
@@ -21,7 +23,10 @@ const initialState: InitialStateType = {
 
 /* Reducer */
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+const appReducer = (state = initialState, action:
+  // AppActionTypes
+  ToggleFetchingActionType
+): InitialStateType => {
   switch (action.type) {
     case INITIALIZED_SUCCESS:
       return {
@@ -41,26 +46,29 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
 
 /* Action Creators */
 
-type InitializeSuccessACType = () => {
+export type AppActionTypes = InitializeSuccessActionType | ToggleFetchingActionType
+// export type AppActionTypes = ToggleFetchingActionType
+
+type InitializeSuccessActionType = {
   type: typeof INITIALIZED_SUCCESS
 }
-export const initializeSuccess: InitializeSuccessACType = () => ({type: INITIALIZED_SUCCESS})
+export const initializeSuccess = (): InitializeSuccessActionType => ({type: INITIALIZED_SUCCESS})
 
-type ToggleFetchingACType = (isFetching: boolean) => {
+type ToggleFetchingActionType = {
   type: typeof TOGGLE_FETCHING
   isFetching: boolean
 }
-export const toggleFetching: ToggleFetchingACType = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
+export const toggleFetching = (isFetching: boolean): ToggleFetchingActionType => ({type: TOGGLE_FETCHING, isFetching})
 
 
 /* Thunks */
 
-export const initializeApp = () => async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, any, AppActionTypes>
+
+export const initializeApp = (): ThunkType => async (dispatch) => {
   const promise = await dispatch(getAuthUserData())
-  // debugger
   Promise.all([promise]).then(() => dispatch(initializeSuccess()))
 }
-
 
 
 /* Default export */

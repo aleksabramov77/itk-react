@@ -1,6 +1,9 @@
 import {profileAPI} from '../api/api'
-import {toggleFetching} from './appReducer'
-import {PhotosType, PostType, UserProfileType} from "../types/types";
+import {AppActionTypes, toggleFetching} from './appReducer'
+import {ContactsType, PhotosType, PostType, UserProfileType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {FORM_ERROR} from "final-form";
+import {AppStateType} from "./redux-store";
 
 
 /* Actions types */
@@ -16,7 +19,7 @@ const SET_PROFILE_PHOTO = 'profilePage/SET_PROFILE_PHOTO'
 
 type InitialStateType = typeof initialState
 
-const initialState  = {
+const initialState = {
   status: '',
   userProfile: {
     fullName: '',
@@ -33,11 +36,11 @@ const initialState  = {
       website: '',
       youtube: '',
       mainLink: '',
-    },
-    photos:{
-      small:'',
-      large:''
-    }
+    } as ContactsType,
+    photos: {
+      small: '',
+      large: ''
+    } as PhotosType
   } as UserProfileType,
   postsData: [
     {id: 1, message: 'Hi, how are you', likesCount: 5},
@@ -48,7 +51,7 @@ const initialState  = {
 
 /* Reducer */
 
-const profilePageReducer = (state = initialState, action: any): InitialStateType => {
+const profilePageReducer = (state = initialState, action: ProfilePageActionTypes): InitialStateType => {
 
   switch (action.type) {
 
@@ -56,16 +59,16 @@ const profilePageReducer = (state = initialState, action: any): InitialStateType
       return {
         ...state,
         postsData: [...state.postsData, {
-          id: state.postsData.length + 1, //id counter imitation
+          id: Date.now(), //id counter imitation
           message: action.newPostText,
           likesCount: state.postsData.length + 1  //likes counter imitation
-        }],
+        }]
       }
 
     case DELETE_POST:
       return {
         ...state,
-        postsData: [...state.postsData.filter(p => p.id !== action.id)],
+        postsData: [...state.postsData.filter(p => p.id !== action.id)]
       }
 
     case SET_USER_PROFILE_DATA:
@@ -81,7 +84,7 @@ const profilePageReducer = (state = initialState, action: any): InitialStateType
     case SET_STATUS:
       return {
         ...state,
-        status: action.statusText,
+        status: action.status
       }
 
     case SET_PROFILE_PHOTO:
@@ -101,67 +104,71 @@ const profilePageReducer = (state = initialState, action: any): InitialStateType
 
 /* Action Creators */
 
-type AddPostACType = (newPostText: string) => {
+type ProfilePageActionTypes = AddPostActionType | DeletePostActionType | SetUserProfileDataActionType
+  | SetUserStatusActionType | SetProfilePhotoActionType
+
+type AddPostActionType = {
   type: typeof ADD_POST
   newPostText: string
 }
-export const addPost: AddPostACType = (newPostText) => ({type: ADD_POST, newPostText})
+export const addPost = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText})
 
-type DeletePostACType = (id: number) => {
+type DeletePostActionType = {
   type: typeof DELETE_POST
   id: number
 }
-export const deletePost: DeletePostACType = (id) => ({type: DELETE_POST, id})
+export const deletePost = (id: number): DeletePostActionType => ({type: DELETE_POST, id})
 
-type SetUserProfileDataACType = (userProfile: UserProfileType) => {
+type SetUserProfileDataActionType = {
   type: typeof SET_USER_PROFILE_DATA
   userProfile: UserProfileType
 }
-export const setUserProfileData: SetUserProfileDataACType = (userProfile) => ({
+export const setUserProfileData = (userProfile: UserProfileType): SetUserProfileDataActionType => ({
   type: SET_USER_PROFILE_DATA,
   userProfile
 })
 
-type SetUserStatusACType = (statusText: string) => {
+type SetUserStatusActionType = {
   type: typeof SET_STATUS
-  statusText: string
+  status: string
 }
-export const setUserStatus: SetUserStatusACType = (statusText) => ({type: SET_STATUS, statusText})
+export const setUserStatus = (status: string): SetUserStatusActionType => ({type: SET_STATUS, status})
 
-type SetProfilePhotoACType = (photos: PhotosType) => {
+type SetProfilePhotoActionType = {
   type: typeof SET_PROFILE_PHOTO
   photos: PhotosType
 }
-export const setProfilePhoto: SetProfilePhotoACType = (photos) => ({type: SET_PROFILE_PHOTO, photos})
+export const setProfilePhoto = (photos: PhotosType): SetProfilePhotoActionType => ({type: SET_PROFILE_PHOTO, photos})
 
 
 /* Thunks */
 
-export const getUserProfile = (userId: number) => async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void | { contacts: any }>, AppStateType, any, ProfilePageActionTypes | AppActionTypes>
+
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
   toggleFetching(true)
   const response = await profileAPI.getProfile(userId)
   dispatch(setUserProfileData(response.data))
   dispatch(toggleFetching(false))
 }
 
-export const getUserStatus = (userId: number) => async (dispatch: any) => {
+export const getUserStatus = (userId: number): ThunkType => async (dispatch) => {
   const response = await profileAPI.getUserStatus(userId)
   dispatch(setUserStatus(response.data))
 }
 
-export const updateUserStatus = (statusText: string) => async (dispatch: any) => {
+export const updateUserStatus = (status: string): ThunkType => async (dispatch) => {
   try {
-    const response = await profileAPI.updateUserStatus(statusText)
+    const response = await profileAPI.updateUserStatus(status)
     if (response.data.resultCode === 0) {
-      dispatch(setUserStatus(statusText))
+      dispatch(setUserStatus(status))
     }
   } catch (error) {
-    // debugger
     alert('Error from thank "updateUserStatus":' + error)
   }
 }
 
-export const updatePhoto = (photo: any) => async (dispatch: any) => {
+export const updatePhoto = (photo: File): ThunkType => async (dispatch) => {
   toggleFetching(true)
   const response = await profileAPI.updatePhoto(photo)
   if (response.data.resultCode === 0) {
@@ -170,25 +177,23 @@ export const updatePhoto = (photo: any) => async (dispatch: any) => {
   }
 }
 
-export const updateProfileData = (formData: UserProfileType) => async (dispatch: any) => {
+export const updateProfileData = (userProfileData: UserProfileType): ThunkType => async (dispatch) => {
   toggleFetching(true)
-  const response = await profileAPI.updateProfileData(formData)
-  // debugger
+  const response = await profileAPI.updateProfileData(userProfileData)
   if (response.data.resultCode === 0) {
-    dispatch(getUserProfile(formData.userId))
+    await dispatch(getUserProfile(userProfileData.userId))
     dispatch(toggleFetching(false))
   } else {
-
-    const errorsObj: { 'contacts': { [index: string]: string } } = {contacts: {}}
-    response.data.messages.map((message: string) => {
-      const errorMessage: string = message.split('->')[1].replace(')', '').toLowerCase()
-      errorsObj.contacts[errorMessage] = message
-    })
+    const errorsObj = {contacts: {}}
+    errorsObj.contacts = response.data.messages.reduce((acc: any, curr: string) => {
+      const key = curr.split('->')[1].replace(')', '').toLowerCase()
+      const val = curr.split(' (')[0]
+      return {...acc, [key]: val}
+    }, {})
     return errorsObj
     // return { [FORM_ERROR]: response.data.messages[0] }
   }
 }
-
 
 
 /* Default export */

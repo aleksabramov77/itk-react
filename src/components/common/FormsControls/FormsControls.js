@@ -28,6 +28,7 @@ import s from './FormsControls.module.css'
 
 // Второй метод
 export const Element = Element => ({ input, meta, ...props }) => {
+    // console.log("meta.touched: ", meta.touched)
     const hasError = meta.submitError || (meta.touched && meta.error)
     return (
         <div className={ s.formControl + " " + (hasError ? s.error : "") }>
